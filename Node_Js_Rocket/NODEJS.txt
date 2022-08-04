@@ -9,6 +9,8 @@ trabalharem.
 
 
 
+PARÂMETROS DAS REQUISIÇÕES
+
 * Header Params
 
     São os parâmetros adicionados no cabeçalho da requisição, como por exemplo o token de acesso, o tipo de autorização e
@@ -18,14 +20,21 @@ trabalharem.
 
     Parâmetros enviados pela url da API, eles são estruturados em formato chave valor, como por exemplo: url?param1=val1&param2=val2...
 
+    localhost:8000/home?id=value&nome=valueName
+
 * Route Params
 
     Parâmetros passados para referenciar a rota que está sendo utilizada. São adicionados a url a partir de uma váriavel para
-    completar o caminho destinado.
+    completar o caminho destinado. Estes são passados apenas como um valor a acrescentar na utl, como por exemplo:
+
+    localhost:8000/{param}
 
 * Body Params
 
     Neste caso já são parâmetros vindo do corpo da requisição.
+
+    São objetos enviados no cropo da requisição para um cadastro de dados, ou um objeto para enviado para alteração de algo.
+    Estes parâmetros são enviados em formato JSON
 
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------
