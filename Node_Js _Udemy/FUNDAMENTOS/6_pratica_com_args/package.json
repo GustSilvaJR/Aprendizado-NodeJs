@@ -9,6 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "minimist": "^1.2.6"
+    "minimist": "^1.2.6",
+    "package-lock.json": "^1.0.0",
+    "package.json": "^2.0.1"
   }
 }

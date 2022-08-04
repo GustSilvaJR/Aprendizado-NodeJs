@@ -1,0 +1,39 @@
+NODEJS
+
+* Node js foi feito usando V8 engine, do javascript
+
+* É baseado em event loop, que inspeciona uma pilha Call Stack de funções chamadas e direciona para Threads 
+trabalharem.
+    * Nose é considerado single Thread, pelo fato do event loop acontecer em somente uma thread, porém, no momento
+      em que uma função precisa ser executada, o event loop a direciona a uma outra thread. Tendo 4 disponíveis.
+
+
+
+* Header Params
+
+    São os parâmetros adicionados no cabeçalho da requisição, como por exemplo o token de acesso, o tipo de autorização e
+    o método de envio(get,post,put,delete);
+
+* Query Params
+
+    Parâmetros enviados pela url da API, eles são estruturados em formato chave valor, como por exemplo: url?param1=val1&param2=val2...
+
+* Route Params
+
+    Parâmetros passados para referenciar a rota que está sendo utilizada. São adicionados a url a partir de uma váriavel para
+    completar o caminho destinado.
+
+* Body Params
+
+    Neste caso já são parâmetros vindo do corpo da requisição.
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+* TIPOS DE CHAMADOS
+
+    -> Get: Retornar alguma informação simples, Buscar uma informação no servidor
+    -> Post: Salvar uma informação no servidor
+    -> Put: Alterar uma informação no servidor
+    -> patch: Alterar uma informação específica
+    -> Delete: Deletar uma informação no servidor

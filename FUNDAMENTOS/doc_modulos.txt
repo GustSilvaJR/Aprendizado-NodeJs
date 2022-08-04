@@ -1,7 +1,0 @@
-Há 3 tipos básicos de modulos:
-
-1-> Módulos Internos: Módulos criados pelo próprio usuário. São como funções que são exportadas dentro do sistema, ou algo como componentes do react;
-
-2-> Módulos Nativos: Módulos inertes ao node js, que já vem de "fábrica" com ele;
-
-3-> Módulos Externos: São módulos criados por outros usuários e disponibilizados para download por esses mesmos usuários;
