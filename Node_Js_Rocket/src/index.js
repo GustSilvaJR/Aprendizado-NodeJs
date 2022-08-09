@@ -1,3 +1,4 @@
+const { response } = require('express');
 const express = require('express'); //Importando o modulo
 const {v4 : uuidv4} = require('uuid');
 
@@ -22,7 +23,7 @@ app.post("/account", (request, response) => {
         (customer) => customer.cpf == cpf
     );
     
-    console.log(customerAlreadyExists, cpf, customers)
+    //console.log(customerAlreadyExists, cpf, customers)
 
     if(customerAlreadyExists){
         return response.status(400).json({error:"Customer already exists!"});
@@ -37,6 +38,17 @@ app.post("/account", (request, response) => {
 
     response.status(201).send(); //Retornando status 201, que é quando um dado foi salvo
 
+});
+
+app.get("/statement/:cpf", (request, response) => {
+
+    const { cpf } = request.params;
+
+    console.log("Entrei");
+    customer = customers.find((customer) => customer.cpf === cpf);
+
+
+    return response.json(customer.statement);
 });
 
 app.listen(3333);
