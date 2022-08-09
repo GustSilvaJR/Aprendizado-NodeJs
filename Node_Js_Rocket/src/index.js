@@ -7,16 +7,23 @@ const customers = [];
 
 app.use(express.json()); //Utilizando um midlleware para conseguir receber Json
 
-/**
- * cpf - string
- * name - string
- * id - uuid
- * statement - []
- */
+//Criando um Middleware para verificar se existe ou não um usuário cadastrado com aquele cpf. Se existir, retorna dentro do request o cliente encontrado
+function verifyIfExistsCustomer(request, response, next){
+    const { cpf } = request.headers;
+
+    customer = customers.find((customer) => customer.cpf === cpf);
+
+    if(!customer){
+        return response.status(400).json({error: "Could not find the customer!"});
+    }
+
+    request.customer = customer;
+
+    return next();
+}
 
 app.post("/account", (request, response) => {
     const { cpf, name } = request.body; //Utilizando desestruturação
-    const id = uuidv4();
 
     //Utilizando a função some para iterar em meu array de objetos representando contas cadastradas para verificar se há algum cpf ja cadastrado
     const customerAlreadyExists = customers.some( 
@@ -32,7 +39,7 @@ app.post("/account", (request, response) => {
     customers.push({
         cpf,
         name,
-        id,
+        id:uuidv4(),
         statement:[]
     });
 
@@ -40,15 +47,47 @@ app.post("/account", (request, response) => {
 
 });
 
-app.get("/statement/:cpf", (request, response) => {
+app.post("/deposit", verifyIfExistsCustomer, (request, response) => {
+    const { description, amount } = request.body;
+    const {customer} = request;
 
-    const { cpf } = request.params;
+    console.log(description, amount, request.body);
 
-    console.log("Entrei");
-    customer = customers.find((customer) => customer.cpf === cpf);
+    const statementOperation = {
+        description,
+        amount,
+        created_at: new Date(),
+        type: "Credit"
+    };
 
+    customer.statement.push(statementOperation);
+
+    return response.status(201).send();
+
+});
+
+app.get("/statement", verifyIfExistsCustomer, (request, response) => {
+
+    const {customer} = request;
 
     return response.json(customer.statement);
+});
+
+app.get("/statement/date", verifyIfExistsCustomer, (request, response) =>{
+    const {customer} = request;
+
+    const {date} = request.query; 
+
+    console.log(date, customer);
+
+    const dateFormat = new Date(date + " 00:00");
+
+    const statement = customer.statement.filter((statement) => 
+        statement.created_at.toDateString() === new Date(dateFormat).toDateString()
+    )
+
+    return response.status(200).json(statement);
+
 });
 
 app.listen(3333);
