@@ -22,7 +22,8 @@ function verifyIfExistsCustomer(request, response, next){
     return next();
 }
 
-app.post("/account", (request, response) => {
+//Cria um cliente com base no CPF e no NOME informado
+app.post("/create", (request, response) => {
     const { cpf, name } = request.body; //Utilizando desestruturação
 
     //Utilizando a função some para iterar em meu array de objetos representando contas cadastradas para verificar se há algum cpf ja cadastrado
@@ -30,7 +31,6 @@ app.post("/account", (request, response) => {
         (customer) => customer.cpf == cpf
     );
     
-    //console.log(customerAlreadyExists, cpf, customers)
 
     if(customerAlreadyExists){
         return response.status(400).json({error:"Customer already exists!"});
@@ -47,6 +47,7 @@ app.post("/account", (request, response) => {
 
 });
 
+//Registra um depósito na conta do cliente
 app.post("/deposit", verifyIfExistsCustomer, (request, response) => {
     const { description, amount } = request.body;
     const {customer} = request;
@@ -66,6 +67,26 @@ app.post("/deposit", verifyIfExistsCustomer, (request, response) => {
 
 });
 
+//Altera o nome do cliente cadastrado, com base no nome passado e filtrando pelo cpf informado no header
+app.put("/update", verifyIfExistsCustomer, (request, response) => {
+    const {customer} = request;
+    const {newName} = request.body;
+
+    customer.name = newName;
+
+    response.status(200).send();
+});
+
+//Deletar um usuário de acordo com o cpf informado
+
+//Retornar a conta do usuário
+app.get("/account", verifyIfExistsCustomer, (request, response) => {
+    const {customer} = request;
+    
+    return response.status(201).json(customer);
+});
+
+//Apresenta todas as transações a respeito de um determinado cliente
 app.get("/statement", verifyIfExistsCustomer, (request, response) => {
 
     const {customer} = request;
@@ -73,6 +94,7 @@ app.get("/statement", verifyIfExistsCustomer, (request, response) => {
     return response.json(customer.statement);
 });
 
+//Apresenta as transações de um cliente de acordo com a data informada
 app.get("/statement/date", verifyIfExistsCustomer, (request, response) =>{
     const {customer} = request;
 
