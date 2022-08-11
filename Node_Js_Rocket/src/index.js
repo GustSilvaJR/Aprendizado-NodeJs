@@ -1,4 +1,4 @@
-const { response } = require('express');
+const { response, request } = require('express');
 const express = require('express'); //Importando o modulo
 const {v4 : uuidv4} = require('uuid');
 
@@ -22,8 +22,20 @@ function verifyIfExistsCustomer(request, response, next){
     return next();
 }
 
+function getBalance(statement){
+    const balance = statement.reduce((value, operation) => {
+        if(operation.type == "Credit"){
+            return value + parseFloat(operation.amount);
+        }else{
+            return value - parseFloat(operation.amount); 
+        }
+    }, 0)
+
+    return balance;
+}
+
 //Cria um cliente com base no CPF e no NOME informado
-app.post("/create", (request, response) => {
+app.post("/account", (request, response) => {
     const { cpf, name } = request.body; //Utilizando desestruturação
 
     //Utilizando a função some para iterar em meu array de objetos representando contas cadastradas para verificar se há algum cpf ja cadastrado
@@ -67,8 +79,29 @@ app.post("/deposit", verifyIfExistsCustomer, (request, response) => {
 
 });
 
+//Registra um saque na conta do cliente
+app.post("/withdraw", verifyIfExistsCustomer, (request, response) => {
+    const {customer} = request;
+    const { description , amount} = request.body;
+
+    if((getBalance(customer.statement) - amount) >= 0){
+        const statementOperation = {
+            description,
+            amount,
+            created_at: new Date(),
+            type: "Withdraw"
+        };
+
+        customer.statement.push(statementOperation);
+
+        return response.status(200).send();
+    }else{
+        return response.status(400).json("Saldo insuficiente em conta!");
+    }
+});
+
 //Altera o nome do cliente cadastrado, com base no nome passado e filtrando pelo cpf informado no header
-app.put("/update", verifyIfExistsCustomer, (request, response) => {
+app.put("/account", verifyIfExistsCustomer, (request, response) => {
     const {customer} = request;
     const {newName} = request.body;
 
@@ -78,6 +111,25 @@ app.put("/update", verifyIfExistsCustomer, (request, response) => {
 });
 
 //Deletar um usuário de acordo com o cpf informado
+app.delete("/account", verifyIfExistsCustomer, (request, response) => {
+    const {customer} = request;
+
+    customers.splice(customers.indexOf(customer), 1);
+
+    return response.status(200).json(customers);
+
+});
+
+//Retorna saldo em conta
+app.get("/balance", verifyIfExistsCustomer, (request, response) => {
+    const {customer} = request;
+
+    console.log(getBalance(customer.statement), typeof(getBalance(customer.statement)));
+
+    const balance = getBalance(customer.statement);
+
+    return response.status(200).json(balance);
+});
 
 //Retornar a conta do usuário
 app.get("/account", verifyIfExistsCustomer, (request, response) => {
