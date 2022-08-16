@@ -1,0 +1,23 @@
+yarn add @types/express -D 
+
+Este comando permite que eu instale os recursos de inthelisense de uma biblioteca que eu esteja utilizando. Nesse caso, instalando
+para a biblioteca express. E -D já que esse auxílio só me é util em ambiente de desenvolvimento.
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+yarn tsc --init 
+
+Inicia o typescrip no projeto, depois de adicionar ele com o yarn add, claro.
+
+
+yarn tsc
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+Cria uma versão do arquivo server  que estamos trabalhando que permita ser interpretada pelo node, convertendo nosso código typescript 
+
+
+"outDir": "./dist", 
+
+Habilitando essa opção em tsconfig.json eu direciono os arquivos criados com yarn tsc para uma pasta específica, para evitar redun-
+dância e confusão no código.
