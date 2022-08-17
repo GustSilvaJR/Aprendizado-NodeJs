@@ -22,6 +22,7 @@ function verifyIfExistsCustomer(request, response, next){
     return next();
 }
 
+//Função para calcular saldo total do usuário em conta de acordo com os depositos e saques na conta do usuário
 function getBalance(statement){
     const balance = statement.reduce((value, operation) => {
         if(operation.type == "Credit"){
