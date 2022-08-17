@@ -9,10 +9,8 @@ yarn tsc --init
 
 Inicia o typescrip no projeto, depois de adicionar ele com o yarn add, claro.
 
-
-yarn tsc
-
 -------------------------------------------------------------------------------------------------------------------------------
+yarn tsc
 
 Cria uma versão do arquivo server  que estamos trabalhando que permita ser interpretada pelo node, convertendo nosso código typescript 
 
@@ -21,3 +19,18 @@ Cria uma versão do arquivo server  que estamos trabalhando que permita ser inte
 
 Habilitando essa opção em tsconfig.json eu direciono os arquivos criados com yarn tsc para uma pasta específica, para evitar redun-
 dância e confusão no código.
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+Interface name {
+    nameAtt: tipo,
+    ...
+}
+
+
+A partir do typeScript é possível a criação de uma interface que represente um tipo de dados
+na nossa aplicação. Dessa forma, posso atribuir ela a uma variavel, para que essa só esteja
+válida se receber o determinado tipo de dado.
+
+
+
