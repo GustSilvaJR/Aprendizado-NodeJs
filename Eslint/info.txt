@@ -1,0 +1,22 @@
+O ESLINT irá me auxiliar a padronizar meus códigos em um sistema que esteja desenvolvimento, com algumas configurações básics como
+utilizar sempre aspas simples ou ter ou não ter ponto e vírgula ao final das linhas.
+
+Existem diversos padrões populares já desenvolvidos e disponíveis para selecionármos na hora de configurá-lo. Como por exemplo o o arbinb,
+contendo diversas configurações bases ja utilizadas por diversos desenvolvedores.
+
+É possível configurar também no próprio vs code uma maneira para que ao salvar seu arquivo, o próprio eslint ja altere seu código
+segundo as configurações setadas por você anteriormente.
+
+
+INSTALAÇÃO
+
+npm init @eslint/config
+
+    ... (seleciono minhas configurações)
+
+
+Em seguida para auto alteração quando salvar. Basta dar Ctrl + Shift + P , ir sem Settings of User Json  e adicionar:
+
+"editor.codeActionsOnSave": {
+        "source.fixAll": true
+}
