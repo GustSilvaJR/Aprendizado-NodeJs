@@ -25,7 +25,7 @@ PARÂMETROS DAS REQUISIÇÕES
 * Route Params
 
     Parâmetros passados para referenciar a rota que está sendo utilizada. São adicionados a url a partir de uma váriavel para
-    completar o caminho destinado. Estes são passados apenas como um valor a acrescentar na utl, como por exemplo:
+    completar o caminho destinado. Estes são passados apenas como um valor a acrescentar na url, como por exemplo:
 
     localhost:8000/{param}
 
