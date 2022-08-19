@@ -1,0 +1,134 @@
+html,body{
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+
+/*------------------CAROUSEL----------------------*/
+.img1 img{
+    width: 900px;
+    height: 500px;
+    margin-top: 100px;
+}
+
+.img1 p,h3{
+    font-family: 'Amatic SC', cursive;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.img2 img{
+    margin-top: -5px;
+    width: 420px;
+    margin-bottom: 120px;
+    margin-top: 90px;
+}
+
+.img2 p{
+    font-family: 'Amatic SC', cursive;
+    font-size: 2.2em;
+    font-weight: bolder;
+}
+
+.img3 img{
+    width: 620px;
+    margin-bottom: 120px;
+    margin-top: 90px;
+}
+
+.img3 p{
+    font-family: 'Amatic SC', cursive;
+    font-size: 2.2em;
+    font-weight: bolder;
+}
+#box1 .carousel-control-prev:hover{
+    background-image: linear-gradient(to left, #ffffff, #b9b9b9, #777777, #3b3b3b, #000000);
+    opacity: 0.1;
+    border-radius: 0.5;
+}
+
+#box1 .carousel-control-next:hover{
+    background-image: linear-gradient(to right, #ffffff, #b9b9b9, #777777, #3b3b3b, #000000);
+    opacity: 0.1;
+    border-radius: 0.5;
+}/*------------------ FIM CAROUSEL----------------------*/
+
+
+/* ----------------------NAVBAR-------------------------*/
+#menu{
+    background-image: linear-gradient(to bottom, #141414, #212121, #2e2e2f, #3c3c3e, #4b4b4d);
+    font-family: 'Staatliches', cursive;
+    font-size: 28px;
+    letter-spacing: 1.5px;
+}/* ----------------------FIM NAVBAR-------------------------*/
+
+
+
+/*--------------PARALLAX-----------------*/
+#box1, #box2{
+    height: 100%;
+    /*opacity: 0.7;*/
+    background-attachment: fixed;
+    background-size: cover;
+    background-position:center;
+    background-repeat: no-repeat;
+}
+
+#box1{
+    background-image: linear-gradient(to bottom, #141414, #212121, #2e2e2f, #3c3c3e, #4b4b4d);
+}
+
+#box2{
+    background-image: linear-gradient(to right bottom, #161643, #1b1448, #21124c, #270e50, #2f0753);
+}/*------------FIM PARALLAX--------------*/
+
+/*-------------CONTEUDO------------------*/
+.conteudo{
+    background-color: #fff;
+    height: 300px;
+}
+
+.conteudo h1{
+    font-family: 'Staatliches', cursive;
+    letter-spacing: 8px;
+    text-align: left;
+    margin-left: 25px;
+    font-size: 6em;
+}
+
+.conteudo p{
+    font-family: 'Space Mono', monospace;
+    font-size:26px;
+}/*------------FIM CONTEUDO---------------*/
+
+/* ------------FORMULARIO-----------------*/
+#areaForm{
+    color:white;
+    width: 700px;
+}
+
+#areaForm form {
+    padding-top: 80px;
+
+}
+
+#tituloForm{
+    font-family: 'Staatliches', cursive;
+    letter-spacing: 6px;
+    margin-bottom: 15px;
+}
+
+#check h1{
+    font-family: 'Staatliches', cursive;
+    letter-spacing: 6px;
+}
+
+.titleIcon{
+    font-family: 'Staatliches', cursive;
+    letter-spacing: 3px;
+}
+
+#outro{
+    background: transparent;
+    color: white;
+}
