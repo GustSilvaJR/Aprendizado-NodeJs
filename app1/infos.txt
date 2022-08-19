@@ -1,0 +1,7 @@
+process.argv
+
+Process é um objeto do node js  que contem diversos atributos, um deles, argv. Este, é um array que contem os argumentos de linha de comando 
+passados quando o node js foi instanciado. 
+
+A posição 0 contém a instância de execução do node js, o segundo o arquivo node que está sendo executado, e a partir deste se tem os argumentos
+opcionais da apliacação em questão, podendo ser uma porta ou demais informações.
