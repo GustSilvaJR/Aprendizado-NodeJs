@@ -20,3 +20,57 @@ Em seguida para auto alteração quando salvar. Basta dar Ctrl + Shift + P , ir 
 "editor.codeActionsOnSave": {
         "source.fixAll": true
 }
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Configuração do ESLINT com o typescript
+
+Iniciando package.json
+    yarn init -y 
+
+Instalando ESLINT
+    yarn add eslint -D
+
+Instalando typescript
+    yarn add typescript -D
+
+Instalando plugins/extensoes necessárias para integrar o typescript com o eslint
+    yarn add eslint-config-airbnb-typescript -D
+    yarn add @typescript-eslint/eslint-plugin -D
+    yarn add @typescript-eslint/parser -D  
+
+Inicializando arquivo de configuração typescript
+    yarn tsc --init
+
+Adicionando tipos do express para serem reconhecidos pelo typescript
+    yarn add @types/express -D  
+
+Adicionando plugin para permitir importações sem que o eslint acuse erro
+    yarn add eslint-plugin-import@latest -D   
+
+Em seguida, basta criar o arquivo de configuração do eslint e adicionar as seguintes configurações bases(formato JSON):
+
+{
+    "env": {
+        "commonjs": true,
+        "es2021": true,
+        "node": true
+    },
+    "extends":[
+        "airbnb-typescript/base", // Airbnb sem suporte para uso com o react
+        "plugin:import/recommended"// Plugin para importações
+    ],
+    "parserOptions": {
+        "project": "./tsconfig.json"
+    },
+    "rules": {
+        "linebreak-style": ["error", "windows"] //Apenas para tratamento de erro no windows em caso do tipo de quebra de linha for CRLF e o eslint requerer o LF
+    }
+}
+
+Rodando ESLINT:
+    ./node_modules/.bin/eslint ./src --ext .ts --fix
+
+    --ext .ts -> Validar arquivos dentro de src que contenham a extensão .ts
+    --fix -> Corrigir qualquer erro encontrado
