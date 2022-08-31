@@ -1,0 +1,21 @@
+Novas Informações adquiridas durante este projeto
+
+--------------TS-NODE-DEV---------------
+Adicionando modulo responsável por executar o node e re-executá-lo assim que houver alguma alteração no sistema.
+Ele também compila o arquivo .ts sem que seja necessário o uso do .tsc, ja convertendo o arquivo para .js e executando 
+Além de muitas outras funcionalidades
+    
+    yarn add ts-node-dev
+
+Configurando um script para executar de forma dinamica e com algumas novas informações
+
+    "scripts":{
+        "dev":"ts-node-dev --transpile-only --ignore-watch node-modules --respawn src/server.ts"   
+    }
+
+    --transpile-only -> Vai apenas executar o sistema, nao retornara os erros de sintaxe ou informações ademais a isso
+
+    --ignore-watch -> Essa extensao serve para indicar um diretorio ou arquivo do qual nao se quer que o ts-node-dev
+    fique observando esperando por qualquer tipo de alteração
+
+    --respawn -> Serve para indicar que sempre que houver alguma alteração no codigo se deve reiniciar o sistema
