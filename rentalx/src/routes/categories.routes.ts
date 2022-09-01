@@ -8,9 +8,16 @@ categoriesRouter.post('/', (request, response)=>{
 
   const { name, description } = request.body;
 
-  categoryRepository.create({ name, description });
+  let categoryAlreadyExists = categoryRepository.findAlreadyExists( name );
 
-  return response.status(201).send();
+  if (categoryAlreadyExists) {
+
+    return response.status(401).json({ 'Message':'User already exists' });
+  } else {
+    
+    categoryRepository.create({ name, description });
+    return response.status(201).send();
+  }
 });
 
 categoriesRouter.get('/', (request, response) =>{
