@@ -30,4 +30,7 @@ export class CategoryRepository {
 
   }
 
+  listar(): Category[] {
+    return this.categories;
+  }
 }
