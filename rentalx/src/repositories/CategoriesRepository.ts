@@ -33,4 +33,11 @@ export class CategoryRepository {
   listar(): Category[] {
     return this.categories;
   }
+
+  findAlreadyExists(name: string): boolean {
+    let exists = this.categories.some((category) => category.name === name);
+
+    return exists;
+  }
+
 }
