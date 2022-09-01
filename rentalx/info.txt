@@ -19,3 +19,23 @@ Configurando um script para executar de forma dinamica e com algumas novas infor
     fique observando esperando por qualquer tipo de alteração
 
     --respawn -> Serve para indicar que sempre que houver alguma alteração no codigo se deve reiniciar o sistema
+
+--------------EXPORT VS EXPORT DEFAULT---------------
+
+Usando export default eu exporto o conteúdo específico do que eu estou exportando. Podendo acessá-lo com import
+utilizando qualquer nome para a variavel que o irá representar, como por exemplor:
+
+Exportando
+    export default getNome(); //Em node js
+
+Importando
+    import abubue from '.my_module.js'
+
+Já utilizando apenas o export, eu exporto a varíavel, classe, etc.. em si do que estou exportando. Dessa forma, para acessá-la, preciso utilizar
+o nome do que foi exportado. Como por exemplo:
+
+Exportando
+    export getNome(); //Em node js
+
+Importando
+    import { getNome }
