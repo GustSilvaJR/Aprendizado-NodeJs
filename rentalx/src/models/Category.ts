@@ -27,6 +27,10 @@ export class Category {
     this._name = name;
   }
 
+  get name():string {
+    return this._name;
+  }
+
   set description(description:string) {
     this._description = description;
   }
