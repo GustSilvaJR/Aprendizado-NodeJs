@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Hello World. This is my Html web page!</h1>
+    <button id="cad" type="button">Create Category</button>
+
+    <form id="login-form">
+        <input type="text" name="name">
+        <input type="text" name="description">
+    </form>
+
+</body>
+
+<script>
+
+    var serialize = function (form) {
+        var json = {};
+        var data = new FormData(form);
+        var keys = data.keys();
+        for (var key = keys.next(); !key.done; key = keys.next()) {
+            var values = data.getAll(key.value);
+            json[key.value] = values.length == 1 ? values[0] : values;
+        }
+        return json;
+    }
+
+
+    document.querySelector("#cad").addEventListener("click", function () {
+        var form = document.querySelector("#login-form");
+        // var params = 
+        // {
+        //     name:'Gustavo',
+        //     description:'Programador'
+        // };
+        form = serialize(form);
+        console.log("aqui:" + form);
+
+        var myInit = {
+            method: 'POST',
+            body: JSON.stringify(form),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+
+
+        fetch("/categories", myInit)
+            .then(function (response) {
+                console.log(response);
+            })
+    });   
+</script>
+
+</html>
