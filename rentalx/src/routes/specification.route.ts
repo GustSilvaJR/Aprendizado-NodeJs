@@ -13,4 +13,9 @@ specificationsRouter.post('/', (request, response)=>{
   return response.status(201).send();
 });
 
+specificationsRouter.get('/', (request, response) => {
+  const data = specificationRepository.list();
+  return response.status(200).json({ 'Specifications':data });
+});
+
 export { specificationsRouter };
