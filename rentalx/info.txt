@@ -41,6 +41,14 @@ Importando
     import { getNome }
 
 
+-------------------------------DTO (Data Transfer Object)-----------------------------------
+
+No lugar de eu importar o model que representa o objeto que pretendo receber os parametros no meu serviço, eu crio uma interface que represente os dados que 
+receberei nesse objeto.
+
+Por exemplo se eu tivesse um serviço para criação de usuario, sendo que no model eu teria id, nome, login, senha, created_at. Contudo, eu preciso especificamente
+receber apenas o nome, login e senha, o resto o proprio sistema irá preencher automatico. Dessa forma, criaria uma interface que represente meu DTO. Que receberá
+somente meus parametros necessarios, e passar como parametro recebido na minha função execute. Dessa forma, ela nao precisaria saber sobre minha model. 
 
 
 -----------------------------------------SOLID----------------------------------------------
