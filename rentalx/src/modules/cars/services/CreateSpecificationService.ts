@@ -8,7 +8,7 @@ interface ISpecificationDTO  {
 class CreateSpecificationService {
   private _specificationServiceRepository: ISpecificationRepository;
 
-  public CreateSpecificationRepository(specificationRepository:ISpecificationRepository) {
+  constructor(specificationRepository:ISpecificationRepository) {
     this._specificationServiceRepository = specificationRepository;
   }
 
