@@ -5,7 +5,7 @@ class SpecificationRepository implements ISpecificationRepository {
 
   private _specifications: Specification[];
 
-  public SpecificationRepository() {
+  constructor() {
     this._specifications = [];
   }
 
