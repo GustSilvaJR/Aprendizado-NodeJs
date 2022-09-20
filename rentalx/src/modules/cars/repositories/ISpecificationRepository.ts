@@ -7,6 +7,7 @@ interface ISpecificationDTO {
 
 interface ISpecificationRepository {
   create({ name, description }: ISpecificationDTO):void;
+  list(): Specification[];
   findByName(name:string): Specification;
 }
 

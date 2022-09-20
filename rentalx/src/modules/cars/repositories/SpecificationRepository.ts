@@ -21,6 +21,10 @@ class SpecificationRepository implements ISpecificationRepository {
     this._specifications.push(specification);
   }
 
+  list():Specification[] {
+    return this._specifications;
+  }
+
   findByName(name: string): Specification {
     const specificationAlreadyExists = this._specifications.find(specification => (specification.name === name));
     return specificationAlreadyExists;
