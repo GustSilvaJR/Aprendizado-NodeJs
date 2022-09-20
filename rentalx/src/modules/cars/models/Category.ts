@@ -12,13 +12,11 @@ export class Category {
 
 
   constructor() {
-    if (!this.id) {
-      this.id = uuid();
+    if (!this._id) {
+      this._id = uuid();
     }
   }
 
-
-  //SETTERS 
   set id(id:string) {
     this._id = id;
   }
@@ -35,8 +33,16 @@ export class Category {
     this._description = description;
   }
 
+  get description() {
+    return this._description;
+  }
+
   set created_at(created_at:Date) {
     this._created_at = created_at;
+  }
+
+  get created_at() {
+    return this._created_at;
   }
 
 }

@@ -1,4 +1,5 @@
-import { CategoryRepository } from '../repositories/CategoriesRepository';
+/* eslint-disable linebreak-style */
+import { ICategoryRepository } from '../repositories/ICateogoryRepository';
 
 interface ICeateCategorieService {
   name: string,
@@ -7,9 +8,9 @@ interface ICeateCategorieService {
 
 export class CreateCategorieService {
 
-  private categorieServiceRepository : CategoryRepository;
+  private categorieServiceRepository : ICategoryRepository;
 
-  constructor(categoryRepository: CategoryRepository) {
+  constructor(categoryRepository: ICategoryRepository) {
     this.categorieServiceRepository = categoryRepository;
   }
 

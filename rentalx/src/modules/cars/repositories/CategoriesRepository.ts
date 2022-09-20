@@ -1,14 +1,16 @@
 import { Category } from '../models/Category';
+import { ICategoryRepository } from './ICateogoryRepository';
 
 //Criando interface que irá representar meu DTO(DATA TRANSFER OBJECT), que servirá para transportar os dados da minha rota para o meu repository
 //Utilizando deste recurso, é possível receber o objeto necessário, sem que o arquivo de rota tenha a necessidade de importar o model Category
 //para criar o objeto que será enviado pelo parâmetro. Isso é uma boa pática
+
 interface ICategoryDTO {
   name: string,
   description: string,
 }
 
-export class CategoryRepository {
+export class CategoriesRepository implements ICategoryRepository {
 
   private categories: Category[];
 

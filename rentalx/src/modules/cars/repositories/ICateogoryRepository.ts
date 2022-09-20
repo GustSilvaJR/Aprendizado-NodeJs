@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 import { Category } from '../models/Category';
 
 interface ICategoryDTO {
@@ -10,3 +11,5 @@ interface ICategoryRepository {
   listar():Category[];
   create({ name, description }: ICategoryDTO): void;
 }
+
+export { ICategoryRepository };
