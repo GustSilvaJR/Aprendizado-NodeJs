@@ -8,14 +8,14 @@ interface ICeateCategorieService {
 
 export class CreateCategorieUseCase {
 
-  private categorieRepository : ICategoryRepository;
+  private categoryRepository : ICategoryRepository;
 
   constructor(categoryRepository: ICategoryRepository) {
-    this.categorieRepository = categoryRepository;
+    this.categoryRepository = categoryRepository;
   }
 
   execute({ description, name }: ICeateCategorieService): void {
-    let categoryAlreadyExists = this.categorieRepository.findAlreadyExists(name);
+    let categoryAlreadyExists = this.categoryRepository.findAlreadyExists(name);
 
     if (categoryAlreadyExists) {
 
@@ -23,7 +23,7 @@ export class CreateCategorieUseCase {
     
     } else {
 
-      this.categorieRepository.create({ name, description });
+      this.categoryRepository.create({ name, description });
     }
   }
 }
