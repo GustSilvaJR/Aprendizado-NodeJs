@@ -13,14 +13,15 @@ interface ICategoryDTO {
 export class CategoriesRepository implements ICategoryRepository {
 
   private static _INSTANCE: CategoriesRepository;
+
   private categories: Category[];
 
   private constructor() {
     this.categories = [];
   }
 
-  public static getInstance():CategoriesRepository{
-    if(!CategoriesRepository._INSTANCE){
+  public static getInstance():CategoriesRepository {
+    if (!CategoriesRepository._INSTANCE) {
       CategoriesRepository._INSTANCE = new CategoriesRepository();
     }
     return CategoriesRepository._INSTANCE;
