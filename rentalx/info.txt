@@ -170,4 +170,84 @@ Há basicamente duas formas de implementar esse tipo de comportamento. Usando fu
         O async identifica que iremos consumir uma promisse dentro do escopo da função e o await identifica que se deve esperar até o valor ser retornado 
         para que assim tomemos alguma decisão
 
+---------------------------------------DOCKER-----------------------------------------------
 
+Inicialmente eu crio um arquivo Dockerfile na raiz do meu projeto com as informações do que eu quero para o container que irei criar.
+
+Em seguida crio um arquivo .dockerignore , e nesse arquivo adiciono os arquivos que nao desejo enviar para o meu container
+    Estes são em gereal:
+        -> node_modules //Ja que iremos instalar no nosso container, nao precisamos passar o que ja temos intalado na nossa maquina
+        ->.vscode
+        ->.git
+
+Como por exemplo o nome da imagem que irei utilizar. Exemplo:
+
+FROM node //Defino a imagem que irei utilizar
+
+WORKDIR /user/app  //Defino o diretório onde irei salvar meus arquivos no docker
+
+COPY package.json ./  //Copio meu package json com minhas dependencias para dentro do workdir que eu defini
+
+RUN npm install  //Instalo as dependencias 
+
+COPY . . //Copio os arquivos do meu projeto para o meu workdir
+
+EXPOSE 3333 //Defino a porta que irei utilizar para acessar a minha aplicação
+
+CMD ["npm", "run", "dev"] //Para rodar o comando no cmd, se passa os comandos separados por espaço dentro de um array
+
+
+docker build -t rentalx .  //Crio o meu container. O ponto no final aponta que o meu arquivo Dockerfile onde está minhas configurações está na minha pasta raiz
+
+docker run -p 3333:3333 rentalx //Rodo o meu container. O -p 3333:3333 define que quando se acessar uma rota na porta 3333, se deve acessar o container cuja porta
+definida é 3333. Em seguida passa o nome do container.
+
+
+--------OUTROS COMANDOS--------
+
+docker ps -> Lista os nossos containers criados
+
+docker exex -it _nome apresentado na instrucao anterior_ /bin/bash  -> Acesso o promp de comando de dentro do meu container
+    -> Em seguida é possível executar comandos internos no meu container. Como por exemplo "ls", para listar os diretórios e arquivos.
+
+
+--------DOCKER COMPOSE---------
+
+A princípio é uma ferramenta que irei utilizar para gerenciar meus containers, e por meio dela consigo definir funções para meus containers, como por exemplo
+um que será a minha aplicação principal e outro que será responsável por rodar meu banco de dados, sendo o serviço de banco. Assim como outros serviços que 
+posso vir a precisar.
+
+Para criar o meu container docker com o compose, eu preciso criar um arquivo docker-compose e definir as configurações de criação lá dentro de maneira identada:
+
+version: '3.7'
+
+services:
+  app:
+    build: .
+    container_name: rentalx
+    ports:
+      - 3333
+    volumes:
+      - .:/user/app
+
+
+Em seguida basta rodar:
+ 
+ docker-compose up -> Cria o container e inicializa o serviço.
+
+ Contudo, esse serviço criado subindo o container que especificamos em Dockerfile só fica de pé durante a execução do nosso serviço. Assim que dou um stop, o container
+ é finalizado. dessa forma só mantem o docker-compose criado. 
+
+Em suma:
+
+Se eu rodar o meu docker-compose ps eu verei o meu container compose criado
+E se eu rodar o docker ps, eu só verei um container criado durante a execução do meu docker-compose, que sobe o serviço desse container. Assim que eu finalizar o 
+docker-compose, o container docker sera finalizado. Restando somente o docker-compose 
+
+--------OUTROS COMANDOS--------
+
+ docker-compose um -d -> Cria o container, o inicializa e o roda em background, liberando o terminal para que eu continue inserindo outros comandos
+
+ docker-compose stop -> Paro meu container. Mais especificamente falando, paro o meu serviço que está dentro do docker-compose.
+
+ docker-compose down -> Paro o meu container, e apago tudo o que foi criado a partir do meu docker-compose. O serviço é apagado
