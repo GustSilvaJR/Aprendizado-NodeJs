@@ -53,3 +53,121 @@ somente meus parametros necessarios, e passar como parametro recebido na minha f
 
 -----------------------------------------SOLID----------------------------------------------
 
+
+--------------------------------PROGRAMAÇÃO ASSÍNCRONA--------------------------------------
+
+Para entender as funções assíncronas, inicialmente preciso ter bem definido como funcionam as funções síncronas.
+
+    -> As funções que trabalham de maneira síncrona executam uma determinada ação que não depende de um objeto externo. Ou seja, assim que executadas, retornarão
+        um valor direto assim que o navegaro ou o sitema a executarem. Como por exemplo:
+
+        document.querySelector("#meuBotao").addEventListener('click', function(){
+            alert("Botão clicado");
+        });
+
+        Nesse caso, assim que o botao que possui o id mueBotao for clicado, será disparado o evento que retorna um alert. De forma bem direta, sem depender
+        necessariamente de algum objeto externo, e sim do próprio sistema para concluir a execução.
+
+Com a forma de funcionamento das funções síncronas definidas, posso agora validar a necessidade das funções assíncronas. Imagine que em uma função você esteja
+buscando dados em algum sistema externo, consumindo uma API ou consultando dados em um banco de dados. Dessa forma, não necessariamente você depende do seu 
+sitema executar o comando para que já se tenha o retorno. E sim de que ao executar, receba do sistema externo o resultado do que se foi requisitado. 
+
+Dessa forma, caso o sistema externo esteja, por exemplo, com uma longa demora no tempo de resposta, o sistema ficaria aguardando por um bom tempo até que a resposta
+seja retornada. Dessa forma, prendendo o usuário naquela linha de código. Isso ocorre pelo fato do javascrit ser uma linguagem de thread único, dessa forma
+ficando preso naquele momento do código até que ele seja finalziado. Essa "prisão" podemos denominar como sendo Blocking. Assim para evitar que o nosso sitema fique
+preso nessa requisição surgiu-se as requisições de forma assíncrona. 
+
+Nesse novo modelo, se executa a instrução, porém não fica preso aquela linha esperando o resultado. O sistema continua realizando outras operações normalmente.
+Quando o resultado for retornado com sucesso ou erro, teremos trativas que irão executar as ações que dependem desse retorno ou informar o erro ao usuário ou 
+tomar contra-medidas de acordo.
+
+Isso nos possibilita escapar do evento que citado acima chamado Blocking. 
+
+Há basicamente duas formas de implementar esse tipo de comportamento. Usando funções de Callback e promises. 
+
+    -> As funções de callback são funções passadas como parâmetro a outras funções, e só serão executadas após uma determinada ação, definida pelo programador, ser
+        concluída. Exatamente o que queríamos, não ? Por exemplo:
+
+        //Minha função callback a ser passada
+        function listDataUser(user){
+            console.log(Object.values(JSON.parse(user)));
+        } 
+
+        //Minha função assíncrona
+        function asyncGetUserById(id, callback, err){
+            const response = fetch("consulta/user/${id}");
+
+            if(response.status === ture){
+                callback(response.data);
+            }else{
+                err(response.status);
+            }
+        }
+
+        //Utilizando a função
+        asyncGetUserById(idUser, listDataUser, (error)=>{
+            console.log("Este erro ocorreu: "+ error);
+        })
+
+        Note que na função de callback que retorna minha excessão, resolvi passar uma arrow function para demonstrar que também podemos definir a função callback
+        diretamente nos parametros da nossa função assíncrona, sem ter que definí-la anteriormente com um nome.
+
+        Dessa maneira, a minha função de callback que é responsável por listar os dados do usuário só será executada após a requisição feita ser concluída. Assim nos
+        permitindo seguir com a execução do código.
+
+    -> Promises, elas são um método mais recente e muito utilizado atualmente. Funcionam como o próprio nome já indica, uma promessa de um retorno de algo. Algo que podemos
+        ser retornado agora, depois ou nunca.
+
+        Promises são estruturadas com dois parâmetros padrões, resolve e reject. Sendo o resolve executado quando uma ação anterior der certo/for concluída e o reject
+        quando houver algum problema. Segue um exemplo:
+
+        //Criando a função que retorna a promise. Nela é feita a busca de um usuario pelo seu id
+        asyncGetUserById(id){
+            return new Promise( (resolve, reject) => {
+              const response = fetch(`consulta/user/${id}`);
+              if(response.status === true){
+                resolve(JSON.parse(response.data));
+              }else{
+                reject("Não foi possível encontrar o usuário.")
+              }  
+            });
+        }
+
+        //Consumido a função
+        asyncGetUserById(idUser)
+            .then( (resp) => {
+                console.log("Usuário: "+Object.values(resp));
+            })
+            .catch( (error) => {
+                console.log(error);
+            });
+
+        Existe uma outra maneira de se consumir uma função que retorna uma promise, que seria utilizando o async await. Isso foi implementado porque algumas 
+        promises retornam outras promises, encadeando uma sequencia de then's que podem deixar o código verboso de mais. Utilizando o async e await se consegue 
+        evitar esse encadeamento. Por exemplo:
+
+        //Desenvolvendo função assincrona que retorna uma promisse. Nessa consulta se retorna todos os usuarios de um banco
+        asyncGetUsers(){
+            return new Promise( (resolve, reject) => {
+              const response = fetch("consulta/users`);
+              if(response.status === true){
+                resolve(JSON.parse(response.data));
+              }else{
+                reject("Não foi possível encontrar o usuário.")
+              }  
+            });
+        }
+
+        //Consumindo a promisse com asyn await
+        async listaUsuarios(){
+            const users = await asyncGetUsers();
+
+            users.map((user)=>{
+                console.log(user.nome);
+            }) 
+        }
+
+        O async identifica que iremos consumir uma promisse dentro do escopo da função e o await identifica que se deve esperar até o valor ser retornado 
+        para que assim tomemos alguma decisão
+
+
