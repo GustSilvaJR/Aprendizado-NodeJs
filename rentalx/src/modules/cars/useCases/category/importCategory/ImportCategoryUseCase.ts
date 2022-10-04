@@ -18,7 +18,6 @@ class ImportCategoryUseCase {
   loadCategories(file:any): Promise<IImportCategory[]> {
     
     return new Promise((resolve, reject)=>{
-
       const stream = fs.createReadStream(file.path);
       const parseFile = parse({
         delimiter:';',
@@ -38,6 +37,7 @@ class ImportCategoryUseCase {
           });
         })
         .on('end', ()=>{
+          fs.promises.unlink(file.path);
           resolve(categoriesToImport);
         })
         .on('error', (err)=>{
@@ -52,9 +52,6 @@ class ImportCategoryUseCase {
 
     categories.map((category)=>{
       const { name, description } = category;
-
-      console.log(category);
-      console.log(name, description, this._categoryRepository.findAlreadyExists(name) );
       
       if (!(this._categoryRepository.findAlreadyExists(name))) {
         this._categoryRepository.create({
