@@ -246,7 +246,7 @@ docker-compose, o container docker sera finalizado. Restando somente o docker-co
 
 --------OUTROS COMANDOS--------
 
- docker-compose um -d -> Cria o container, o inicializa e o roda em background, liberando o terminal para que eu continue inserindo outros comandos
+ docker-compose up -d -> Cria o container, o inicializa e o roda em background, liberando o terminal para que eu continue inserindo outros comandos
 
  docker-compose stop -> Paro meu container. Mais especificamente falando, paro o meu serviço que está dentro do docker-compose.
 
