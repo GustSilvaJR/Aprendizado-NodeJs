@@ -277,7 +277,7 @@ services:
     ports:
       - "3333:3333"
     volumes:
-      - .:/user/app
+      - .:/usr/app
 
 volumes:
   pgdata:
@@ -295,3 +295,4 @@ volumes:
  docker-compose up --force-recreate -> Caso eu crie um novo serviço e eu já tenha criado o meu docker-compose, eu preciso recriar o container
                                         para iniciar o meu novo serviço.
 
+docker logs container_name -f -> Analiso o log de um container. 
