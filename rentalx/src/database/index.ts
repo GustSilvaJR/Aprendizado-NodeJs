@@ -12,6 +12,7 @@ const PostgresDataSource = new DataSource({
   username: 'docker',
   password: 'ignite',
   database: 'rentalx',
+  migrations: [__dirname + '/migrations/*{.js,.ts}'],
 });
 
 async function  inicializaConexao() {
