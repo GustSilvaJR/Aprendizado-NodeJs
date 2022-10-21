@@ -1,5 +1,5 @@
 /* eslint-disable linebreak-style */
-import { Specification } from '../../../models/Specification';
+import { Specification } from '../../../entities/Specification';
 import { ISpecificationRepository } from '../../../repositories/ISpecificationRepository';
 
 class ListSpecificationsUseCase {

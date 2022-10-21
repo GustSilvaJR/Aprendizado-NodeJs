@@ -1,4 +1,4 @@
-import { Category } from '../../models/Category';
+import { Category } from '../../entities/Category';
 import { ICategoryRepository } from '../ICateogoryRepository';
 
 //Criando interface que irá representar meu DTO(DATA TRANSFER OBJECT), que servirá para transportar os dados da minha rota para o meu repository

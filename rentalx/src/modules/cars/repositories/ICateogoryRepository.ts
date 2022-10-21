@@ -1,5 +1,5 @@
 /* eslint-disable linebreak-style */
-import { Category } from '../models/Category';
+import { Category } from '../entities/Category';
 
 interface ICategoryDTO {
   name: string,
