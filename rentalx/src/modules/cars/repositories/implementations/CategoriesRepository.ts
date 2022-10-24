@@ -1,5 +1,7 @@
+import { getRepository, Repository } from 'typeorm';
 import { Category } from '../../entities/Category';
 import { ICategoryRepository } from '../ICateogoryRepository';
+import { PostgresDataSource } from '../../../../database/index';
 
 //Criando interface que irá representar meu DTO(DATA TRANSFER OBJECT), que servirá para transportar os dados da minha rota para o meu repository
 //Utilizando deste recurso, é possível receber o objeto necessário, sem que o arquivo de rota tenha a necessidade de importar o model Category
@@ -14,10 +16,12 @@ export class CategoriesRepository implements ICategoryRepository {
 
   private static _INSTANCE: CategoriesRepository;
 
-  private categories: Category[];
+  private repository: Repository<Category>;
+
+  
 
   private constructor() {
-    this.categories = [];
+    this.repository = PostgresDataSource.getRepository(Category);
   }
 
   public static getInstance():CategoriesRepository {
