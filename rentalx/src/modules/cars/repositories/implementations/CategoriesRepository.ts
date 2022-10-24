@@ -1,4 +1,4 @@
-import { getRepository, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 import { Category } from '../../entities/Category';
 import { ICategoryRepository } from '../ICateogoryRepository';
 import { PostgresDataSource } from '../../../../database/index';
