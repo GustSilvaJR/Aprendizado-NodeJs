@@ -1,9 +1,8 @@
 import { DataSource } from 'typeorm';
 
 //using environment variables
-import dotenv from 'dotenv';
-
-dotenv.config();
+//import dotenv from 'dotenv';
+//dotenv.config();
 
 const PostgresDataSource = new DataSource({
   type: 'postgres',
@@ -13,6 +12,7 @@ const PostgresDataSource = new DataSource({
   password: 'ignite',
   database: 'rentalx',
   migrations: ['./src/database/migrations/*.ts'],
+  entities: ['./src/modules/cars/entities/*.ts'],
 });
 
 async function  inicializaConexao() {
