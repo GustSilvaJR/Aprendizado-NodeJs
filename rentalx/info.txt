@@ -286,6 +286,8 @@ volumes:
 
 --------OUTROS COMANDOS-------------------
 
+ docker-compose ps -> Lista os containers
+
  docker-compose up -d -> Cria o container, o inicializa e o roda em background, liberando o terminal para que eu continue inserindo outros comandos
 
  docker-compose stop -> Paro meu container. Mais especificamente falando, paro o meu serviço que está dentro do docker-compose.
@@ -323,8 +325,8 @@ docker logs container_name -f -> Analiso o log de um container.
 
       docker exec -it CONTAINER_ID /bin/bash    -> Acessando o container
 
-      npm run typeorm migration:create ./src/database/migrations/CreateCategories    ->Criando o migration
+      npm run typeorm migration:create ./src/database/migrations/CreateCategories    -> Criando o migration
 
-      npx run typeorm -- -d ./src/database/index.ts migration:run     -> Executando a migration
+      npx run typeorm -- -d ./src/database/migrations/index.ts migration:run     -> Executando a migration
     
     
