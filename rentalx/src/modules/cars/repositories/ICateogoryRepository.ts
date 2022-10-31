@@ -7,9 +7,9 @@ interface ICategoryDTO {
 }
 
 interface ICategoryRepository {
-  findAlreadyExists(name: string) : boolean;
-  listar():Category[];
-  create({ name, description }: ICategoryDTO): void;
+  findAlreadyExists(name: string) : Promise<boolean>;
+  listar():Promise<Category[]>;
+  create({ name, description }: ICategoryDTO): Promise<void>;
 }
 
 export { ICategoryRepository };
