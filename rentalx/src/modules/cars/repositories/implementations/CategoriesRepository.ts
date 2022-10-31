@@ -18,8 +18,6 @@ export class CategoriesRepository implements ICategoryRepository {
 
   private repository: Repository<Category>;
 
-  
-
   private constructor() {
     this.repository = PostgresDataSource.getRepository(Category);
   }
@@ -31,28 +29,26 @@ export class CategoriesRepository implements ICategoryRepository {
     return CategoriesRepository._INSTANCE;
   }
 
-  create({ name, description }: ICategoryDTO): void {
+  async create({ name, description }: ICategoryDTO): Promise<void> {
 
-    const category = new Category();
-
-    Object.assign(category, {
-      name,
+    const category = this.repository.create({
       description,
-      created_at: new Date(),
+      name,
     });
 
-    this.categories.push(category);
+    await this.repository.save(category);
 
   }
 
-  listar(): Category[] {
-    return this.categories;
+  async listar(): Promise<Category[]> {
+    const categories = await this.repository.find();
+    return categories;
   }
 
-  findAlreadyExists(name: string): boolean {
-    let exists = this.categories.some((category) => category.name === name);
-
-    return exists;
+  async findAlreadyExists(name: string): Promise<boolean> {
+    
+    const category = await this.repository.findOneBy({ name });
+    return category ? true : false;
   }
 
 }
