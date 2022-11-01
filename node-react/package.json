@@ -8,9 +8,12 @@
   },
   "dependencies": {
     "@types/express": "^4.17.14",
+    "@types/node-fetch": "^2.6.2",
     "@types/whatwg-fetch": "^0.0.33",
     "express": "^4.16.2",
     "http-proxy-middleware": "^2.0.6",
+    "node-fetch": "2",
+    "package.json": "^2.0.1",
     "ts-node-dev": "^2.0.0"
   },
   "devDependencies": {
