@@ -1,4 +1,4 @@
-import { request, response, Router } from "express";
+import { Router } from "express";
 import { InstrucaoServicoController } from "../controllers/instrucaoServicoController";
 
 const instrucaoServico = new InstrucaoServicoController();
@@ -10,6 +10,7 @@ instrucaoServicoRouter.get("/instrucaoServico", (request, response) => {
 
 instrucaoServicoRouter.get("/instrucaoServicoReal", (request, response) => {
     const { codigoFilial } = request.query;
+    console.log(codigoFilial, request.query);
 
     instrucaoServico.getInstrucaoServicoReal(request, response, String(codigoFilial));
 })
