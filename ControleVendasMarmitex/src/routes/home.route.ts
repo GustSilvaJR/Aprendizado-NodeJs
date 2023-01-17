@@ -3,7 +3,7 @@ import { HomeController } from './../controllers/HomeController';
 
 
 import { AppDataSource } from '../database';
-import { User } from '../models/user.entity';
+import { User } from '../modules/auth/entities/User';
 
 const homeRoute = Router();
 const homeController = new HomeController();
