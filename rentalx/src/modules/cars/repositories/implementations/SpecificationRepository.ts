@@ -4,14 +4,15 @@ import { ISpecificationRepository, ISpecificationDTO } from '../ISpecificationRe
 class SpecificationRepository implements ISpecificationRepository {
 
   private static _INSTANCE:SpecificationRepository;
+
   private _specifications: Specification[];
 
   private constructor() {
     this._specifications = [];
   }
 
-  public static getInstance():SpecificationRepository{
-    if(!SpecificationRepository._INSTANCE){
+  public static getInstance():SpecificationRepository {
+    if (!SpecificationRepository._INSTANCE) {
       SpecificationRepository._INSTANCE = new SpecificationRepository();
     }
     return SpecificationRepository._INSTANCE;

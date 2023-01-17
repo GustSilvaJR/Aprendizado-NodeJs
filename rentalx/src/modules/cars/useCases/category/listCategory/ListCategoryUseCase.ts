@@ -1,18 +1,18 @@
-import { Category } from "../../../entities/Category";
-import { ICategoryRepository } from "../../../repositories/ICateogoryRepository";
+import { Category } from '../../../entities/Category';
+import { ICategoryRepository } from '../../../repositories/ICateogoryRepository';
 
 
-class ListCategoryUseCase{
-    private _categoryRepository;
+class ListCategoryUseCase {
+  private _categoryRepository;
 
-    constructor(categoryRepository:ICategoryRepository){
-        this._categoryRepository = categoryRepository;
-    }
+  constructor(categoryRepository:ICategoryRepository) {
+    this._categoryRepository = categoryRepository;
+  }
 
-    execute():Category[]{
-        return this._categoryRepository.listar();
-    }
+  execute():Category[] {
+    return this._categoryRepository.listar();
+  }
 
 }
 
-export {ListCategoryUseCase}
+export { ListCategoryUseCase };
