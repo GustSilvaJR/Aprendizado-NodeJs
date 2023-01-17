@@ -2,8 +2,15 @@
 import express from 'express';
 import { homeRoute } from './src/routes/home.route';
 
+import dotenv from 'dotenv';
+
 const app = express();
-const port = process.env.PORT || 5000;
+
+const result = dotenv.config({ path:'./.env' });
+
+console.log(result);
+
+const port = process.env.PORT;
 
 app.use(express.json());
 app.use(homeRoute);
