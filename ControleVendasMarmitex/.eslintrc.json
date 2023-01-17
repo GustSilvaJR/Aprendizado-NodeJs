@@ -12,6 +12,6 @@
         "project": "./ControleVendasMarmitex/tsconfig.json"
     },
     "rules": {
-        "linebreak-style": ["error", "unix"] //Apenas para tratamento de erro no windows em caso do tipo de quebra de linha for CRLF e o eslint requerer o LF
+        "linebreak-style": ["error", "unix"]
     }
 }
