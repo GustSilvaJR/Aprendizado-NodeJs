@@ -1,8 +1,9 @@
 import { Repository } from 'typeorm';
 import { AppDataSource } from '../../../../database';
+//import md5 from 'md5';
 
 import { User } from '../../entities/User';
-import { IUserRepository, IUserDTO } from '../IUserRepository';
+import { IUserRepository, IUserDTO, IUserLoginDTO } from '../IUserRepository';
 
 export class UserRepository implements IUserRepository {
 
@@ -19,6 +20,20 @@ export class UserRepository implements IUserRepository {
       UserRepository._INSTANCE = new UserRepository();
     }
     return UserRepository._INSTANCE;
+  }
+
+  async signIn({ email, senha }: IUserLoginDTO): Promise<boolean> {
+    
+    const user = await this.repository.find({
+      where: {
+        email: email,
+        senha: senha,
+      },
+    });
+
+    let val =  user.length === 0 ? false : true; 
+
+    return val;
   }
 
   getUserByEmail(email: string): Promise<User> {

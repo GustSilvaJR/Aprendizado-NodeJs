@@ -7,7 +7,7 @@ export const AppDataSource = new DataSource({
   username: 'root',
   password: 'root',
   database: 'bolsin',
-  entities: ['./src/models/*.ts'],
+  entities: ['./src/modules/auth/entities/*.ts'],
 });
 
 AppDataSource.initialize()
