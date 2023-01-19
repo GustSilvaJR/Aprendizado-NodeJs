@@ -8,7 +8,7 @@ export interface IUserDTO {
 
 export interface IUserLoginDTO {
   email:string,
-  senha:string
+  password:string
 }
 
 export interface IUserRepository {
@@ -16,5 +16,5 @@ export interface IUserRepository {
   getAllUsers(): Promise<Array<User>>;
   createUser({ name, email, senha }:IUserDTO): Promise<User>
 
-  signIn({ email, senha }:IUserLoginDTO): Promise<boolean>;
+  signIn({ email, password }:IUserLoginDTO): Promise<boolean>;
 }

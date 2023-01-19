@@ -1,6 +1,9 @@
 /* eslint-disable linebreak-style */
 import express from 'express';
 
+//Alowing cross-origin
+import cors from 'cors';
+
 //typeorm
 import 'reflect-metadata';
 import { AppDataSource } from './src/database/index';
@@ -24,6 +27,8 @@ dotenv.config({ path:'./.env' });
 const port = process.env.PORT;
 
 app.use(express.json());
+app.use(cors());
+
 app.use([homeRoute, authRoute]);
 
 app.listen(port);

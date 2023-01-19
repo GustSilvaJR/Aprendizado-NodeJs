@@ -7,7 +7,7 @@ export class SignInUseCase {
     this.userRepository = userRespository;
   }
 
-  execute({ email, senha }:IUserLoginDTO):Promise<boolean> {
-    return this.userRepository.signIn({ email, senha });
+  execute({ email, password }:IUserLoginDTO):Promise<boolean> {
+    return this.userRepository.signIn({ email, password });
   }
 }

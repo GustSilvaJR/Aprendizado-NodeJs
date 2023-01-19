@@ -22,12 +22,14 @@ export class UserRepository implements IUserRepository {
     return UserRepository._INSTANCE;
   }
 
-  async signIn({ email, senha }: IUserLoginDTO): Promise<boolean> {
+  async signIn({ email, password }: IUserLoginDTO): Promise<boolean> {
     
+    console.log(email, password);
+
     const user = await this.repository.find({
       where: {
         email: email,
-        senha: senha,
+        senha: password,
       },
     });
 

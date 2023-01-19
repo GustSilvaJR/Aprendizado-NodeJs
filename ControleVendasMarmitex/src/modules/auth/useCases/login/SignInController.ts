@@ -13,9 +13,11 @@ export class SignInController {
 
   async handle(request:Request, response:Response) {
 
-    const { email, senha } = request.body;
+    const { email, password } = request.body;
 
-    const result = await this._signInUseCase.execute({ email, senha });
+    console.log('Aqui:', email, password );
+
+    const result = await this._signInUseCase.execute({ email, password });
 
     const textResponse = {
       auth:result,
