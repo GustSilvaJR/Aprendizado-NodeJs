@@ -15,7 +15,7 @@ export class UserRepository implements IUserRepository {
     this.repository = AppDataSource.getRepository(User);
   }
 
-  public static getInstance():UserRepository {
+  public static getInstance(): UserRepository {
     if (!UserRepository._INSTANCE) {
       UserRepository._INSTANCE = new UserRepository();
     }
@@ -23,7 +23,7 @@ export class UserRepository implements IUserRepository {
   }
 
   async signIn({ email, password }: IUserLoginDTO): Promise<boolean> {
-    
+
     console.log(email, password);
 
     const user = await this.repository.find({
@@ -33,14 +33,30 @@ export class UserRepository implements IUserRepository {
       },
     });
 
-    let val =  user.length === 0 ? false : true; 
+    let val = user.length === 0 ? false : true;
 
     return val;
   }
 
-  getUserByEmail(email: string): Promise<User> {
-    console.log(email);
-    throw new Error('Method not implemented.');
+  async sendRecEmail(email: string): Promise<boolean> {
+    console.log('E-mail recebido: ' + email);
+
+    return await this.getUserByEmail(email) ? true : false;
+  }
+
+  async getUserByEmail(email: string): Promise<User | false> {
+
+    const user = await this.repository.find({
+      where: {
+        email: email,
+      },
+    });
+
+    if (user.length > 0) {
+      return user[0];
+    } else {
+      return false;
+    }
   }
 
   getAllUsers(): Promise<User[]> {
@@ -51,5 +67,5 @@ export class UserRepository implements IUserRepository {
     console.log(name, email, senha);
     throw new Error('Method not implemented.');
   }
-    
+
 }

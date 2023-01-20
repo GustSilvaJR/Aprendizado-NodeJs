@@ -12,9 +12,9 @@ export interface IUserLoginDTO {
 }
 
 export interface IUserRepository {
-  getUserByEmail(email:string): Promise<User>;
+  getUserByEmail(email:string): Promise<User | false>;
   getAllUsers(): Promise<Array<User>>;
   createUser({ name, email, senha }:IUserDTO): Promise<User>
-
+  sendRecEmail(email: string): Promise<boolean>
   signIn({ email, password }:IUserLoginDTO): Promise<boolean>;
 }
