@@ -4,6 +4,7 @@ import { AppDataSource } from '../../../../database';
 
 import { User } from '../../entities/User';
 import { IUserRepository, IUserDTO, IUserLoginDTO } from '../IUserRepository';
+import jwt  from 'jsonwebtoken';
 
 export class UserRepository implements IUserRepository {
 
@@ -22,10 +23,10 @@ export class UserRepository implements IUserRepository {
     return UserRepository._INSTANCE;
   }
 
-  async signIn({ email, password }: IUserLoginDTO): Promise<boolean> {
+  async signIn({ email, password }: IUserLoginDTO): Promise<{ auth:boolean, adress:string | undefined } | false> {
 
-    console.log(email, password);
-
+    console.log(email, password, 'To no sign in');
+   
     const user = await this.repository.find({
       where: {
         email: email,
@@ -33,9 +34,18 @@ export class UserRepository implements IUserRepository {
       },
     });
 
-    let val = user.length === 0 ? false : true;
-
-    return val;
+    if ( !(user.length === 0) ) {
+      let val = {
+        auth: true,
+        token: jwt.sign({ email:user[0].email, filial:user[0].filial }),
+        adress: user[0].filial,
+      };
+  
+      return val;
+    } else {
+      return false;
+    }
+    
   }
 
   async sendRecEmail(email: string): Promise<boolean> {

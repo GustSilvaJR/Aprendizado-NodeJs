@@ -7,7 +7,8 @@ export class SignInUseCase {
     this.userRepository = userRespository;
   }
 
-  execute({ email, password }:IUserLoginDTO):Promise<boolean> {
+  execute({ email, password }:IUserLoginDTO):Promise<{ auth:boolean, adress: string | undefined } | false> {
+    console.log('Passei no use case');
     return this.userRepository.signIn({ email, password });
   }
 }

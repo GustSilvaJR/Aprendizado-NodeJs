@@ -19,5 +19,8 @@ export class User {
     senha?: string;  
 
   @Column()
-    administrador?: boolean;  
+    administrador?: boolean;
+    
+  @Column()
+    filial?: string;  
 }

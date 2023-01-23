@@ -6,7 +6,7 @@ export class SignInController {
 
   private _signInUseCase;
 
-  constructor(signInUseCase: SignInUseCase) {
+  constructor(signInUseCase: SignInUseCase ) {
     this._signInUseCase = signInUseCase;
   }
 
@@ -20,7 +20,7 @@ export class SignInController {
     const result = await this._signInUseCase.execute({ email, password });
 
     const textResponse = {
-      auth:result,
+      ...result,
       msg: result ? 'Logado com sucesso!' : 'Usuário ou senha inválidos',
     };
 

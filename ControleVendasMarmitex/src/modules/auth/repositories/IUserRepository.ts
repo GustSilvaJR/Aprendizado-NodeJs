@@ -16,5 +16,5 @@ export interface IUserRepository {
   getAllUsers(): Promise<Array<User>>;
   createUser({ name, email, senha }:IUserDTO): Promise<User>
   sendRecEmail(email: string): Promise<boolean>
-  signIn({ email, password }:IUserLoginDTO): Promise<boolean>;
+  signIn({ email, password }:IUserLoginDTO): Promise<{ auth:boolean, adress:string | undefined } | false>;
 }
