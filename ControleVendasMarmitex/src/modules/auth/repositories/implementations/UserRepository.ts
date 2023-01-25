@@ -1,6 +1,5 @@
 import { Repository } from 'typeorm';
 import { AppDataSource } from '../../../../database';
-//import md5 from 'md5';
 
 import { User } from '../../entities/User';
 import { IUserRepository, IUserDTO, IUserLoginDTO } from '../IUserRepository';
@@ -35,9 +34,12 @@ export class UserRepository implements IUserRepository {
     });
 
     if ( !(user.length === 0) ) {
+
+      const secret:string = String(process.env.SECRET);
+
       let val = {
         auth: true,
-        token: jwt.sign({ email:user[0].email, filial:user[0].filial }),
+        token: jwt.sign({ email:user[0].email, filial:user[0].filial }, secret ),
         adress: user[0].filial,
       };
   
