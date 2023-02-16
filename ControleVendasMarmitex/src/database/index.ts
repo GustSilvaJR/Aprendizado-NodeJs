@@ -2,11 +2,11 @@ import { DataSource } from 'typeorm';
 
 export const AppDataSource = new DataSource({
   type: 'mysql',
-  host: 'localhost',
+  host: '192.168.1.250',
   port: 3306,
   username: 'root',
   password: 'root',
-  database: 'bolsin',
+  database: 'dgs_cloud',
   entities: ['./src/modules/auth/entities/*.ts'],
 });
 
