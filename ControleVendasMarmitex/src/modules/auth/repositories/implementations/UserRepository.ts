@@ -28,8 +28,8 @@ export class UserRepository implements IUserRepository {
    
     const user = await this.repository.find({
       where: {
-        email: email,
-        senha: password,
+        NOM_EMAIL: email,
+        NOM_SENHA: password,
       },
     });
 
@@ -39,8 +39,8 @@ export class UserRepository implements IUserRepository {
 
       let val = {
         auth: true,
-        token: jwt.sign({ email:user[0].email, filial:user[0].filial }, secret ),
-        adress: user[0].filial,
+        token: jwt.sign({ email:user[0].NOM_EMAIL, filial:user[0].NOM_USUARIO }, secret ),
+        adress: 'TESTE',
       };
   
       return val;
@@ -60,7 +60,7 @@ export class UserRepository implements IUserRepository {
 
     const user = await this.repository.find({
       where: {
-        email: email,
+        NOM_EMAIL: email,
       },
     });
 

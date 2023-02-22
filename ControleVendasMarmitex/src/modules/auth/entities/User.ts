@@ -3,24 +3,30 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity({
-  name:'usuarios',
+  name: 'adm_usuarios',
 })
 export class User {
   @PrimaryGeneratedColumn()
-    id_usuario?: number;
+    HANDLE?: number;
 
   @Column()
-    nome?: string;
+    DAT_INCLUIDO?: Date;
 
   @Column()
-    email?: string;
+    NOM_USUARIO?: string;
 
   @Column()
-    senha?: string;  
+    NOM_SENHA?: string;
 
   @Column()
-    administrador?: boolean;
-    
+    NOM_EMAIL?: string;
+
   @Column()
-    filial?: string;  
+    FLG_STATUS?: string;
+
+  @Column()
+    HAN_EMPRESA?: number;
+
+  @Column()
+    FLG_TIPO_USUARIO?: string;
 }
