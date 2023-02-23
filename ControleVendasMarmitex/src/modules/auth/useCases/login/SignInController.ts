@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { Request } from 'express';
 import { SignInUseCase } from './SignInUseCase';
 
 
@@ -11,7 +11,7 @@ export class SignInController {
   }
 
 
-  async handle(request:Request, response:Response) {
+  async handle(request:Request) {
 
     const { email, password } = request.body;
 
@@ -24,6 +24,6 @@ export class SignInController {
       msg: result ? 'Logado com sucesso!' : 'Usuário ou senha inválidos',
     };
 
-    return response.json(textResponse);
+    return textResponse;
   }
 }

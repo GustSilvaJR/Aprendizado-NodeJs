@@ -1,6 +1,6 @@
 import { UserRepository } from '../../repositories/implementations/UserRepository';
-import { SignInUseCase } from './SignInUseCase';
 import { SignInController } from './SignInController';
+import { SignInUseCase } from './SignInUseCase';
 
 
 const userRepository  = UserRepository.getInstance();

@@ -1,9 +1,9 @@
 import { Repository } from 'typeorm';
 import { AppDataSource } from '../../../../database';
 
+import jwt from 'jsonwebtoken';
 import { User } from '../../entities/User';
-import { IUserRepository, IUserDTO, IUserLoginDTO } from '../IUserRepository';
-import jwt  from 'jsonwebtoken';
+import { IUserDTO, IUserLoginDTO, IUserRepository } from '../IUserRepository';
 
 export class UserRepository implements IUserRepository {
 
@@ -40,7 +40,7 @@ export class UserRepository implements IUserRepository {
       let val = {
         auth: true,
         token: jwt.sign({ email:user[0].NOM_EMAIL, filial:user[0].NOM_USUARIO }, secret ),
-        adress: 'TESTE',
+        adress: '',
       };
   
       return val;
