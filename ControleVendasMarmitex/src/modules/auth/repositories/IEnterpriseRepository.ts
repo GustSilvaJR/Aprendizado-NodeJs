@@ -1,6 +1,6 @@
 
 export interface IEnterpriseDTO {
-  name:string | undefined,
+  nameEnterprise:string | undefined,
   apiAdress:string | undefined,
 }
 

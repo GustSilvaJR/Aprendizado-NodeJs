@@ -3,6 +3,7 @@ import { AppDataSource } from '../../../../database';
 
 import jwt from 'jsonwebtoken';
 import { User } from '../../entities/User';
+import { AuthSignInDTO } from '../../interfaces/authSignInDTO';
 import { IUserDTO, IUserLoginDTO, IUserRepository } from '../IUserRepository';
 
 export class UserRepository implements IUserRepository {
@@ -22,7 +23,7 @@ export class UserRepository implements IUserRepository {
     return UserRepository._INSTANCE;
   }
 
-  async signIn({ email, password }: IUserLoginDTO): Promise<{ auth:boolean, adress:string | undefined } | false> {
+  async signIn({ email, password }: IUserLoginDTO): Promise<AuthSignInDTO | false> {
 
     console.log(email, password, 'To no sign in');
    
@@ -37,10 +38,10 @@ export class UserRepository implements IUserRepository {
 
       const secret:string = String(process.env.SECRET);
 
-      let val = {
+      let val:AuthSignInDTO = {
         auth: true,
         token: jwt.sign({ email:user[0].NOM_EMAIL, filial:user[0].NOM_USUARIO }, secret ),
-        adress: '',
+        han_empresa:user[0].HAN_EMPRESA,
       };
   
       return val;

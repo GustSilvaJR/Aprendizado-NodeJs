@@ -8,7 +8,7 @@ export class AdressApiController {
     this._adressApiUseCase = adressApiUseCase;
   }
 
-  async handle(handleEmpresa: number) {
+  async handle(handleEmpresa: number | undefined) {
     console.log('Handle empresa: ' + handleEmpresa);
 
     const result = await this._adressApiUseCase.execute(handleEmpresa);

@@ -32,7 +32,7 @@ export class EnterpriseRepository implements IEnterpriseRepository {
 
       if (!(enterprise.length == 0)) {
         const dataEnterprise:IEnterpriseDTO = {        
-          name: enterprise[0].NOM_EMPRESA,
+          nameEnterprise: enterprise[0].NOM_EMPRESA,
           apiAdress: enterprise[0].NOM_ENDERECO_API,
         };
 

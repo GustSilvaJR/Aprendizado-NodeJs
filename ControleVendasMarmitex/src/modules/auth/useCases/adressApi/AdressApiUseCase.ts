@@ -9,7 +9,7 @@ export class AdressApiUseCase {
     this.enterpriseRepository = enterpriseRepository;
   }
 
-  execute(handle:number):Promise<IEnterpriseDTO | false> {
+  execute(handle:number | undefined):Promise<IEnterpriseDTO | false> {
     return this.enterpriseRepository.getAddressApi(handle);
   }
 
