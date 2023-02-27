@@ -43,7 +43,7 @@ export class EnterpriseRepository implements IEnterpriseRepository {
       }
 
     } catch (error) {
-      throw new Error('Erro ao consultar empresa.');
+      throw new Error('Erro ao consultar empresa.\nError: ' + error );
     }
     
   }
