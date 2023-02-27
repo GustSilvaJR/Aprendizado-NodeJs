@@ -13,9 +13,10 @@ export class SignInController {
 
   async handle(request:Request) {
 
-    const { email, password } = request.body;
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    const { email, password, han_system } = request.body;
 
-    console.log('Aqui:', email, password );
+    console.log('Aqui:', email, password, han_system );
 
     const result = await this._signInUseCase.execute({ email, password });
 
