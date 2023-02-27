@@ -1,5 +1,3 @@
-/* eslint-disable linebreak-style */
-
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity({
