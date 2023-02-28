@@ -20,8 +20,13 @@ export class SignInController {
 
     const result = await this._signInUseCase.execute({ email, password });
 
+    if (typeof result == 'object') {
+      console.log(result.han_empresa);
+    }
+
     const textResponse = {
       ...result,
+      han_system,
       msg: result ? 'Logado com sucesso!' : 'Usuário ou senha inválidos',
     };
 
