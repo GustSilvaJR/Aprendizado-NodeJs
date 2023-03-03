@@ -26,7 +26,7 @@ export class UserRepository implements IUserRepository {
   async signIn({ email, password }: IUserLoginDTO): Promise<AuthSignInDTO | false> {
 
     console.log(email, password, 'To no sign in');
-   
+
     const user = await this.repository.find({
       where: {
         NOM_EMAIL: email,
@@ -34,21 +34,21 @@ export class UserRepository implements IUserRepository {
       },
     });
 
-    if ( !(user.length === 0) ) {
+    if (!(user.length === 0)) {
 
-      const secret:string = String(process.env.SECRET);
+      const secret: string = String(process.env.SECRET);
 
-      let val:AuthSignInDTO = {
+      let val: AuthSignInDTO = {
         auth: true,
-        token: jwt.sign({ email:user[0].NOM_EMAIL, filial:user[0].NOM_USUARIO }, secret ),
-        han_empresa:user[0].HAN_EMPRESA,
+        token: jwt.sign({ email: user[0].NOM_EMAIL, filial: user[0].NOM_USUARIO }, secret, { expiresIn: '1h' }),
+        han_empresa: user[0].HAN_EMPRESA,
       };
-  
+
       return val;
     } else {
       return false;
     }
-    
+
   }
 
   async sendRecEmail(email: string): Promise<boolean> {
