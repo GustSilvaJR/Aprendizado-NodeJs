@@ -9,8 +9,8 @@ import 'reflect-metadata';
 import { AppDataSource } from './src/database/index';
 
 //Routes
-import { homeRoute } from './src/routes/home.route';
 import { authRoute } from './src/routes/auth.route';
+import { userRoute } from './src/routes/user.route';
 
 //To use my enviroments variables
 import dotenv from 'dotenv';
@@ -29,6 +29,6 @@ const port = process.env.PORT;
 app.use(express.json());
 app.use(cors());
 
-app.use([homeRoute, authRoute]);
+app.use([authRoute, userRoute]);
 
 app.listen(port);

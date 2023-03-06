@@ -2,9 +2,10 @@ import { User } from '../entities/User';
 import { AuthSignInDTO } from '../interfaces/authSignInDTO';
 
 export interface IUserDTO {
-  name:string,
-  email:string,
-  senha:string,
+  nom_usuario:string,
+  nom_senha:string,
+  nom_email:string,
+  han_empresa:number,
 }
 
 export interface IUserLoginDTO {
@@ -15,7 +16,7 @@ export interface IUserLoginDTO {
 export interface IUserRepository {
   getUserByEmail(email:string): Promise<User | false>;
   getAllUsers(): Promise<Array<User>>;
-  createUser({ name, email, senha }:IUserDTO): Promise<User>
+  createUser({ nom_usuario, nom_senha, nom_email, han_empresa }:IUserDTO): Promise<boolean>
   sendRecEmail(email: string): Promise<boolean>
   signIn({ email, password }:IUserLoginDTO): Promise<AuthSignInDTO | false>;
 }

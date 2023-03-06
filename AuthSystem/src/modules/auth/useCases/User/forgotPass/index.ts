@@ -1,6 +1,6 @@
-import { UserRepository } from '../../repositories/implementations/UserRepository';
-import { ForgotPassUseCase } from './ForgotPassUseCase';
+import { UserRepository } from '../../../repositories/implementations/UserRepository';
 import { ForgotPassController } from './ForgotPassController';
+import { ForgotPassUseCase } from './ForgotPassUseCase';
 
 
 

@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
-import { adressApiController } from '../adressApi';
+import { adressApiController } from '../../adressApi';
+import { qtdLicensesController } from '../../getQtdLicenses';
 import { SignInUseCase } from './SignInUseCase';
-import { qtdLicensesController } from '../getQtdLicenses';
 
 
 export class SignInController {

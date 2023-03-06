@@ -9,7 +9,7 @@
         "plugin:import/recommended"// Plugin para importações
     ],
     "parserOptions": {
-        "project": "./ControleVendasMarmitex/tsconfig.json"
+        "project": "./tsconfig.json"
     },
     "rules": {
         "linebreak-style": ["error", "windows"]

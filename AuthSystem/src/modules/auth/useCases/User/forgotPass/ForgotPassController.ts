@@ -15,8 +15,6 @@ export class ForgotPassController {
 
     const { email } = request.body;
 
-    console.log('Aqui:', email);
-
     const result = await this._forgotPassUseCase.execute(email);
 
     const textResponse = {

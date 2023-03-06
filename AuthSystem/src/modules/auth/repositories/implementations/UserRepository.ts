@@ -5,6 +5,7 @@ import jwt from 'jsonwebtoken';
 import { User } from '../../entities/User';
 import { AuthSignInDTO } from '../../interfaces/authSignInDTO';
 import { IUserDTO, IUserLoginDTO, IUserRepository } from '../IUserRepository';
+import md5 from 'md5';
 
 export class UserRepository implements IUserRepository {
 
@@ -24,8 +25,6 @@ export class UserRepository implements IUserRepository {
   }
 
   async signIn({ email, password }: IUserLoginDTO): Promise<AuthSignInDTO | false> {
-
-    console.log(email, password, 'To no sign in');
 
     const user = await this.repository.find({
       where: {
@@ -72,12 +71,55 @@ export class UserRepository implements IUserRepository {
     }
   }
 
-  getAllUsers(): Promise<User[]> {
-    throw new Error('Method not implemented.');
+  async createUser(dataUser: IUserDTO): Promise<boolean> {
+    
+    const date = new Date();
+
+    //Pegando a data atual
+    let day = date.getDate();
+    let month = date.getMonth();
+    let year = date.getFullYear();
+
+    //Pegando o horário atual
+    let hour = date.getHours();
+    let minutes = date.getMinutes();
+    let seconds = date.getSeconds();
+
+    const currentHour = `${hour}:${minutes}:${seconds}`;
+    const currentDate = `${year}-${month}-${day}`;
+
+    const datIncluido = `${currentDate} ${currentHour}`;
+
+    console.log('Data criação de usuario:' + datIncluido);
+    console.log(dataUser);
+
+    const user = await this.repository
+      .createQueryBuilder()
+      .insert()
+      .values({
+        DAT_INCLUIDO: datIncluido,
+        NOM_USUARIO: dataUser.nom_usuario,
+        NOM_SENHA: md5(dataUser.nom_senha),
+        NOM_EMAIL: dataUser.nom_email,
+        FLG_STATUS: 'A',
+        HAN_EMPRESA: dataUser.han_empresa,
+        FLG_TIPO_USUARIO: 'C',
+      })
+      .execute();
+
+    if (user) {
+      console.log(typeof(user), user);
+      return true;
+
+    } else {
+      console.log(typeof(user), user);
+      return false;
+      
+    }
+
   }
 
-  createUser({ name, email, senha }: IUserDTO): Promise<User> {
-    console.log(name, email, senha);
+  getAllUsers(): Promise<User[]> {
     throw new Error('Method not implemented.');
   }
 

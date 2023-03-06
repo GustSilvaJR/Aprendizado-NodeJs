@@ -1,4 +1,4 @@
-import { UserRepository } from '../../repositories/implementations/UserRepository';
+import { UserRepository } from '../../../repositories/implementations/UserRepository';
 import { SignInController } from './SignInController';
 import { SignInUseCase } from './SignInUseCase';
 
