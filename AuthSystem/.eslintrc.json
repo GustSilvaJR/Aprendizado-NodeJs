@@ -1,0 +1,17 @@
+{
+    "env": {
+        "commonjs": true,
+        "es2021": true,
+        "node": true
+    },
+    "extends":[
+        "airbnb-typescript/base", // Airbnb sem suporte para uso com o react
+        "plugin:import/recommended"// Plugin para importações
+    ],
+    "parserOptions": {
+        "project": "./ControleVendasMarmitex/tsconfig.json"
+    },
+    "rules": {
+        "linebreak-style": ["error", "windows"]
+    }
+}
