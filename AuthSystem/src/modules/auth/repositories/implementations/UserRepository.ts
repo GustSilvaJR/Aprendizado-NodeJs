@@ -153,8 +153,8 @@ export class UserRepository implements IUserRepository {
 
     const users = await this.repository
       .createQueryBuilder()
-      .select(['nom_usuario'])
-      .getMany();
+      .select(['NOM_USUARIO'])
+      .execute()
 
     console.log(users);
 
