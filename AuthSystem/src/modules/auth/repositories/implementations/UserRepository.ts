@@ -4,8 +4,9 @@ import { AppDataSource } from '../../../../database';
 import jwt from 'jsonwebtoken';
 import { User } from '../../entities/User';
 import { AuthSignInDTO } from '../../interfaces/authSignInDTO';
-import { IUserDTO, IUserLoginDTO, IUserRepository } from '../IUserRepository';
+import { IUserDTO, IUserLoginDTO, IUserRepository, IUserUpdateDTO } from '../IUserRepository';
 import md5 from 'md5';
+import { Console } from 'console';
 
 export class UserRepository implements IUserRepository {
 
@@ -32,6 +33,7 @@ export class UserRepository implements IUserRepository {
         NOM_SENHA: password,
       },
     });
+
 
     if (!(user.length === 0)) {
 
@@ -72,7 +74,7 @@ export class UserRepository implements IUserRepository {
   }
 
   async createUser(dataUser: IUserDTO): Promise<boolean> {
-    
+
     const date = new Date();
 
     //Pegando a data atual
@@ -88,17 +90,16 @@ export class UserRepository implements IUserRepository {
     const currentHour = `${hour}:${minutes}:${seconds}`;
     const currentDate = `${year}-${month}-${day}`;
 
-    const datIncluido = `${currentDate} ${currentHour}`;
+    const datFomat = `${currentDate} ${currentHour}`;
 
-    console.log('Data criação de usuario:' + datIncluido);
-    console.log(dataUser);
+    const datIncluido = new Date(datFomat);
 
     const user = await this.repository
       .createQueryBuilder()
       .insert()
       .values({
-        DAT_INCLUIDO: datIncluido,
         NOM_USUARIO: dataUser.nom_usuario,
+        DAT_INCLUIDO: datIncluido,
         NOM_SENHA: md5(dataUser.nom_senha),
         NOM_EMAIL: dataUser.nom_email,
         FLG_STATUS: 'A',
@@ -108,19 +109,64 @@ export class UserRepository implements IUserRepository {
       .execute();
 
     if (user) {
-      console.log(typeof(user), user);
+      console.log(typeof (user), user);
       return true;
 
     } else {
-      console.log(typeof(user), user);
+      console.log(typeof (user), user);
       return false;
-      
+
     }
 
   }
 
-  getAllUsers(): Promise<User[]> {
-    throw new Error('Method not implemented.');
+  async updateUser(dataUpdate: IUserUpdateDTO): Promise<boolean> {
+
+    console.log(dataUpdate);
+
+    const userUpdate = await this.repository
+      .createQueryBuilder()
+      .update()
+      .set({
+        NOM_USUARIO: dataUpdate.nom_usuario,
+        NOM_EMAIL: dataUpdate.nom_email,
+        NOM_SENHA: md5(dataUpdate.nom_senha),
+        FLG_STATUS: dataUpdate.flg_status,
+        FLG_TIPO_USUARIO: dataUpdate.flg_tipo_usuario,
+        HAN_EMPRESA: dataUpdate.han_empresa,
+      })
+      .where("NOM_EMAIL = :nom_email", { nom_email: dataUpdate.nom_email })
+      .execute();
+
+    if (userUpdate) {
+      console.log(typeof (userUpdate), userUpdate);
+      return true;
+
+    } else {
+      console.log(typeof (userUpdate), userUpdate);
+      return false;
+
+    }
+  }
+
+  async getAllUsers(): Promise<User[] | false> {
+
+    const users = await this.repository
+      .createQueryBuilder()
+      .select(['nom_usuario'])
+      .getMany();
+
+    console.log(users);
+
+    if (users) {
+      console.log(typeof (users), users);
+      return users;
+
+    } else {
+      console.log(typeof (users), users);
+      return false;
+
+    }
   }
 
 }

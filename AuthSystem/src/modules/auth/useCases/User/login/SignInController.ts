@@ -55,7 +55,6 @@ export class SignInController {
 
     }
 
-    console.log(textResponse);
     return response.json(textResponse);
   }
 }
