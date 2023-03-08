@@ -1,4 +1,4 @@
-import { Repository } from 'typeorm';
+import { DeleteResult, Repository } from 'typeorm';
 import { AppDataSource } from '../../../../database';
 
 import jwt from 'jsonwebtoken';
@@ -120,6 +120,17 @@ export class UserRepository implements IUserRepository {
 
   }
 
+  async deleteUser(email: string): Promise<DeleteResult> {
+
+    const userDeleted = await this.repository
+      .createQueryBuilder()
+      .delete()
+      .where("NOM_EMAIL = :nom_email", { nom_email: email })
+      .execute()
+
+    return userDeleted;
+  }
+
   async updateUser(dataUpdate: IUserUpdateDTO): Promise<boolean> {
 
     console.log(dataUpdate);
@@ -153,7 +164,7 @@ export class UserRepository implements IUserRepository {
 
     const users = await this.repository
       .createQueryBuilder()
-      .select(['NOM_USUARIO'])
+      .select(['NOM_USUARIO', 'NOM_EMAIL', 'FLG_STATUS', 'HAN_EMPRESA', 'FLG_TIPO_USUARIO'])
       .execute()
 
     console.log(users);

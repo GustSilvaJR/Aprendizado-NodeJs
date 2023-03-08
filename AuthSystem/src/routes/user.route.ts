@@ -4,6 +4,7 @@ import { Router } from 'express';
 import { createUserController } from '../modules/auth/useCases/User/createUser';
 import { updateUserController } from '../modules/auth/useCases/User/updateUser';
 import { getAllUsersController } from '../modules/auth/useCases/User/getAllUsers';
+import { deleteUserController } from '../modules/auth/useCases/User/deleteUser';
 
 const userRoute = Router();
 
@@ -16,6 +17,12 @@ userRoute.post('/api/user/createUser', async (Request, Response) => {
 userRoute.put('/api/user/updateUser', async (Request, Response) => {
   await updateUserController.handle(Request, Response);
 });
+
+//Deletar algum usuário
+userRoute.delete('/api/user/deleteUser', async (Request, Response) => {
+  await deleteUserController.handle(Request, Response);
+});
+
 
 //Selecionar todos os usuários
 userRoute.get('/api/user/getAllUsers', async (Request, Response) => {

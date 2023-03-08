@@ -1,3 +1,4 @@
+import { DeleteResult } from 'typeorm';
 import { User } from '../entities/User';
 import { AuthSignInDTO } from '../interfaces/authSignInDTO';
 
@@ -27,6 +28,7 @@ export interface IUserRepository {
   getAllUsers(): Promise<Array<User> | false>;
   createUser({ nom_usuario, nom_senha, nom_email, han_empresa }:IUserDTO): Promise<boolean>;
   updateUser(dataUpdate:IUserDTO): Promise<boolean>;
+  deleteUser(email:string): Promise<DeleteResult>;
   sendRecEmail(email: string): Promise<boolean>;
   signIn({ email, password }:IUserLoginDTO): Promise<AuthSignInDTO | false>;
 }
