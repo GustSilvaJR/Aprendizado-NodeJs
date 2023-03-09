@@ -14,7 +14,6 @@ export class CreateUserController {
 
     const result = await this._createUserUseCase.execute({ nom_usuario, nom_senha, nom_email, han_empresa });
 
-    console.log('\n\nResultado criação de usuário: ' + result);
     return response.json(result);
   }
 

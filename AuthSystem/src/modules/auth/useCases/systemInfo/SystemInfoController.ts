@@ -8,7 +8,6 @@ export class SystemInfoController {
   }
 
   async handle(handleSistema: number | undefined) {
-    console.log('Handle sistema: ' + handleSistema);
     
     const result = await this._systemInfoUseCase.execute(handleSistema);
 

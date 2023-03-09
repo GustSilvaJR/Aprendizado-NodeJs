@@ -21,22 +21,22 @@ export class SignInController {
     // eslint-disable-next-line @typescript-eslint/naming-convention
     const { email, password, han_system } = request.body;
 
-    console.log('Aqui:', email, password, han_system);
-
     const result = await this._signInUseCase.execute({ email, password });
 
     if (typeof result == 'object') {
       const dataEnterprise = await adressApiController.handle(result.han_empresa);
-      const qtdLicense = await qtdLicensesController.handle(result.han_empresa, han_system);
+      const qtd_license = await qtdLicensesController.handle(result.han_empresa, han_system);
 
-      if (typeof dataEnterprise == 'object' && typeof qtdLicense == 'number') {
+      if (typeof dataEnterprise == 'object' && typeof qtd_license == 'number') {
 
         textResponse = {
-          token: result.token,
-          auth: result.auth,
-          nom_enterprise: dataEnterprise.nameEnterprise,
+          name_user: result.name_user,
+          name_enterprise: dataEnterprise.nameEnterprise,
+          type_user: result.tipo_usuario,
           adress_api: dataEnterprise.apiAdress,
-          qtdLicense,
+          qtd_license,
+          token: result.token,
+          auth: true,
           msg: result ? 'Logado com sucesso!' : 'Usuário ou senha inválidos',
         };
 

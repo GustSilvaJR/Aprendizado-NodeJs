@@ -7,9 +7,7 @@ export class QtdLicensesController {
     this._qtdLicensesUseCase = qtdLicensesUseCase;
   }
 
-  async handle(handle_enterprise:number | undefined, handle_system:number | undefined) {
-    console.log('Handle Sistema: ' + handle_system + '  |  Handle Empresa: ' + handle_enterprise);
-  
+  async handle(handle_enterprise:number | undefined, handle_system:number | undefined) {  
     const result = await this._qtdLicensesUseCase.execute(handle_enterprise, handle_system);
 
     return result;

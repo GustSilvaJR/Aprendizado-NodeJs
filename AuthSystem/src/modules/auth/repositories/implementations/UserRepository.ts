@@ -35,14 +35,16 @@ export class UserRepository implements IUserRepository {
     });
 
 
-    if (!(user.length === 0)) {
-
+    if (!(user.length == 0 || user[0].FLG_STATUS == 'I')) {
+      
       const secret: string = String(process.env.SECRET);
 
       let val: AuthSignInDTO = {
         auth: true,
-        token: jwt.sign({ email: user[0].NOM_EMAIL, filial: user[0].NOM_USUARIO }, secret, { expiresIn: '1h' }),
+        token: jwt.sign({ email: user[0].NOM_EMAIL, filial: user[0].NOM_USUARIO, tipoUsuario:user[0].FLG_TIPO_USUARIO }, secret, { expiresIn: '1h' }),
         han_empresa: user[0].HAN_EMPRESA,
+        tipo_usuario: user[0].FLG_TIPO_USUARIO,
+        name_user: user[0].NOM_USUARIO,
       };
 
       return val;
@@ -53,8 +55,6 @@ export class UserRepository implements IUserRepository {
   }
 
   async sendRecEmail(email: string): Promise<boolean> {
-    console.log('E-mail recebido: ' + email);
-
     return await this.getUserByEmail(email) ? true : false;
   }
 
@@ -109,11 +109,9 @@ export class UserRepository implements IUserRepository {
       .execute();
 
     if (user) {
-      console.log(typeof (user), user);
       return true;
 
     } else {
-      console.log(typeof (user), user);
       return false;
 
     }
@@ -133,8 +131,6 @@ export class UserRepository implements IUserRepository {
 
   async updateUser(dataUpdate: IUserUpdateDTO): Promise<boolean> {
 
-    console.log(dataUpdate);
-
     const userUpdate = await this.repository
       .createQueryBuilder()
       .update()
@@ -150,11 +146,9 @@ export class UserRepository implements IUserRepository {
       .execute();
 
     if (userUpdate) {
-      console.log(typeof (userUpdate), userUpdate);
       return true;
 
     } else {
-      console.log(typeof (userUpdate), userUpdate);
       return false;
 
     }
@@ -167,14 +161,11 @@ export class UserRepository implements IUserRepository {
       .select(['NOM_USUARIO', 'NOM_EMAIL', 'FLG_STATUS', 'HAN_EMPRESA', 'FLG_TIPO_USUARIO'])
       .execute()
 
-    console.log(users);
 
     if (users) {
-      console.log(typeof (users), users);
       return users;
 
     } else {
-      console.log(typeof (users), users);
       return false;
 
     }
