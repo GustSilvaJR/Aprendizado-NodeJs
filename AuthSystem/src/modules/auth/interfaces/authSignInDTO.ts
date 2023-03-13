@@ -1,7 +1,7 @@
 export interface AuthSignInDTO {
   auth:boolean,
   token: string,
-  han_empresa: number | undefined,
-  tipo_usuario: string | undefined,
+  handle_enterprise: number | undefined,
+  type_user: string | undefined,
   name_user: string | undefined,
 }

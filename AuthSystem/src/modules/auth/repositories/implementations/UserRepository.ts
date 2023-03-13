@@ -42,8 +42,8 @@ export class UserRepository implements IUserRepository {
       let val: AuthSignInDTO = {
         auth: true,
         token: jwt.sign({ email: user[0].NOM_EMAIL, filial: user[0].NOM_USUARIO, tipoUsuario:user[0].FLG_TIPO_USUARIO }, secret, { expiresIn: '1h' }),
-        han_empresa: user[0].HAN_EMPRESA,
-        tipo_usuario: user[0].FLG_TIPO_USUARIO,
+        handle_enterprise: user[0].HAN_EMPRESA,
+        type_user: user[0].FLG_TIPO_USUARIO,
         name_user: user[0].NOM_USUARIO,
       };
 
@@ -154,11 +154,14 @@ export class UserRepository implements IUserRepository {
     }
   }
 
-  async getAllUsers(): Promise<User[] | false> {
+  async getAllUsers(handle_enterprise:number): Promise<User[] | false> {
 
     const users = await this.repository
       .createQueryBuilder()
       .select(['NOM_USUARIO', 'NOM_EMAIL', 'FLG_STATUS', 'HAN_EMPRESA', 'FLG_TIPO_USUARIO'])
+      .where({
+        'HAN_EMPRESA': handle_enterprise,
+      })
       .execute()
 
 

@@ -24,18 +24,19 @@ export class SignInController {
     const result = await this._signInUseCase.execute({ email, password });
 
     if (typeof result == 'object') {
-      const dataEnterprise = await adressApiController.handle(result.han_empresa);
-      const qtd_license = await qtdLicensesController.handle(result.han_empresa, han_system);
+      const dataEnterprise = await adressApiController.handle(result.handle_enterprise);
+      const qtd_license = await qtdLicensesController.handle(result.handle_enterprise, han_system);
 
       if (typeof dataEnterprise == 'object' && typeof qtd_license == 'number') {
 
         textResponse = {
           name_user: result.name_user,
           name_enterprise: dataEnterprise.nameEnterprise,
-          type_user: result.tipo_usuario,
+          type_user: result.type_user,
           adress_api: dataEnterprise.apiAdress,
           qtd_license,
           token: result.token,
+          handle_enterprise: result.handle_enterprise,
           auth: true,
           msg: result ? 'Logado com sucesso!' : 'Usuário ou senha inválidos',
         };

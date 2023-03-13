@@ -25,7 +25,7 @@ export interface IUserLoginDTO {
 
 export interface IUserRepository {
   getUserByEmail(email:string): Promise<User | false>;
-  getAllUsers(): Promise<Array<User> | false>;
+  getAllUsers(handle_enterprise:number): Promise<Array<User> | false>;
   createUser({ nom_usuario, nom_senha, nom_email, han_empresa }:IUserDTO): Promise<boolean>;
   updateUser(dataUpdate:IUserDTO): Promise<boolean>;
   deleteUser(email:string): Promise<DeleteResult>;

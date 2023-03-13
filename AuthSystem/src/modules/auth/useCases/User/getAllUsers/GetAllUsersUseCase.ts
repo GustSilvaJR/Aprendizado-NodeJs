@@ -9,7 +9,7 @@ export class GetAllUsersUseCase{
         this._userRepository = userRepository;
     }
 
-    async execute():Promise<User[] | false>{
-        return await this._userRepository.getAllUsers();
+    async execute(handle_enterprise: number):Promise<User[] | false>{
+        return await this._userRepository.getAllUsers(handle_enterprise);
     }
 }
