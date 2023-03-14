@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { UpdateUserUseCase } from "./updateUserUseCase";
-import { IUserUpdateDTO } from "../../../repositories/IUserRepository";
+import { IUserUpdateDTO } from "../../../interfaces/IUserUpdateDTO";
+
 
 export class UpdateUserController {
     private _updateUserUseCase:UpdateUserUseCase;

@@ -4,9 +4,10 @@ import { AppDataSource } from '../../../../database';
 import jwt from 'jsonwebtoken';
 import { User } from '../../entities/User';
 import { AuthSignInDTO } from '../../interfaces/authSignInDTO';
-import { IUserDTO, IUserLoginDTO, IUserRepository, IUserUpdateDTO } from '../IUserRepository';
+import {IUserLoginDTO, IUserRepository, } from '../IUserRepository';
 import md5 from 'md5';
-import { Console } from 'console';
+import { IUserDTO } from '../../interfaces/IUserDTO';
+import { IUserUpdateDTO } from '../../interfaces/IUserUpdateDTO';
 
 export class UserRepository implements IUserRepository {
 
@@ -130,6 +131,7 @@ export class UserRepository implements IUserRepository {
   }
 
   async updateUser(dataUpdate: IUserUpdateDTO): Promise<boolean> {
+
 
     const userUpdate = await this.repository
       .createQueryBuilder()

@@ -1,4 +1,5 @@
-import { IUserRepository, IUserUpdateDTO } from "../../../repositories/IUserRepository";
+import { IUserUpdateDTO } from "../../../interfaces/IUserUpdateDTO";
+import { IUserRepository } from "../../../repositories/IUserRepository";
 
 export class UpdateUserUseCase {
 

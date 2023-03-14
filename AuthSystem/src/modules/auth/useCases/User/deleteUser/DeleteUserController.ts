@@ -13,6 +13,6 @@ export class DeleteUserController{
 
         const result = await this._deleteUserUseCase.execute(email);
 
-        return result ? response.json({userDeleted:true}) : response.json({userDeleted:false});
+        return result ? response.json(true) : response.json(false);
     }
 }

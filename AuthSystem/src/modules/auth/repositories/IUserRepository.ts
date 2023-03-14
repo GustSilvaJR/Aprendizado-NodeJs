@@ -1,22 +1,11 @@
 import { DeleteResult } from 'typeorm';
 import { User } from '../entities/User';
 import { AuthSignInDTO } from '../interfaces/authSignInDTO';
+import { IUserDTO } from '../interfaces/IUserDTO';
+import { IUserUpdateDTO } from '../interfaces/IUserUpdateDTO';
 
-export interface IUserDTO {
-  nom_usuario:string,
-  nom_senha:string,
-  nom_email:string,
-  han_empresa:number,
-}
 
-export interface IUserUpdateDTO{
-  nom_usuario:string,
-  nom_senha:string,
-  nom_email:string,
-  han_empresa:number,
-  flg_status:string,
-  flg_tipo_usuario:string,
-}
+
 
 export interface IUserLoginDTO {
   email:string,
