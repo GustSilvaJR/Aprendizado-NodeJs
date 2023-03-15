@@ -10,7 +10,7 @@ export class UpdateUserUseCase {
     }
 
     execute(dataUpdate:IUserUpdateDTO):Promise<boolean>{
-        return this._userRepository.updateUser(dataUpdate);
+        return this._userRepository.updateUser(dataUpdate, dataUpdate.nom_email);
     }
 
 }

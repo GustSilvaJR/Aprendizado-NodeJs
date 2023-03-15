@@ -11,18 +11,20 @@ export class UpdateUserController {
     }
 
     async handle(request:Request, response:Response){
-        const {nom_usuario, nom_email, nom_senha, flg_status, flg_tipo_usuario, han_empresa} = request.body;
+        const {nome_usuario, nome_email, senha, flg_status, flg_tipo_usuario, email_original} = request.body;
 
         const dataUpdate:IUserUpdateDTO = {
-            nom_usuario,
-            nom_email,
-            nom_senha, 
+            nom_usuario: nome_usuario,
+            nom_email: nome_email,
+            nom_senha: senha, 
             flg_status, 
             flg_tipo_usuario, 
-            han_empresa,
+            email_original,
         }
 
         const result = await this._updateUserUseCase.execute(dataUpdate);
+
+        console.log(result)
 
         return response.json(result);
 

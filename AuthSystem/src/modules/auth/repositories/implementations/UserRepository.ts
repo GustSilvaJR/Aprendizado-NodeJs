@@ -4,7 +4,7 @@ import { AppDataSource } from '../../../../database';
 import jwt from 'jsonwebtoken';
 import { User } from '../../entities/User';
 import { AuthSignInDTO } from '../../interfaces/authSignInDTO';
-import {IUserLoginDTO, IUserRepository, } from '../IUserRepository';
+import { IUserLoginDTO, IUserRepository, } from '../IUserRepository';
 import md5 from 'md5';
 import { IUserDTO } from '../../interfaces/IUserDTO';
 import { IUserUpdateDTO } from '../../interfaces/IUserUpdateDTO';
@@ -37,12 +37,12 @@ export class UserRepository implements IUserRepository {
 
 
     if (!(user.length == 0 || user[0].FLG_STATUS == 'I')) {
-      
+
       const secret: string = String(process.env.SECRET);
 
       let val: AuthSignInDTO = {
         auth: true,
-        token: jwt.sign({ email: user[0].NOM_EMAIL, filial: user[0].NOM_USUARIO, tipoUsuario:user[0].FLG_TIPO_USUARIO }, secret, { expiresIn: '1h' }),
+        token: jwt.sign({ email: user[0].NOM_EMAIL, filial: user[0].NOM_USUARIO, tipoUsuario: user[0].FLG_TIPO_USUARIO }, secret, { expiresIn: '1h' }),
         handle_enterprise: user[0].HAN_EMPRESA,
         type_user: user[0].FLG_TIPO_USUARIO,
         name_user: user[0].NOM_USUARIO,
@@ -130,33 +130,32 @@ export class UserRepository implements IUserRepository {
     return userDeleted;
   }
 
-  async updateUser(dataUpdate: IUserUpdateDTO): Promise<boolean> {
+  async updateUser(dataUpdate: IUserUpdateDTO, email: string): Promise<boolean> {
 
+    const user = await this.repository.findOneBy({ NOM_EMAIL: dataUpdate.email_original })
 
-    const userUpdate = await this.repository
-      .createQueryBuilder()
-      .update()
-      .set({
-        NOM_USUARIO: dataUpdate.nom_usuario,
-        NOM_EMAIL: dataUpdate.nom_email,
-        NOM_SENHA: md5(dataUpdate.nom_senha),
-        FLG_STATUS: dataUpdate.flg_status,
-        FLG_TIPO_USUARIO: dataUpdate.flg_tipo_usuario,
-        HAN_EMPRESA: dataUpdate.han_empresa,
-      })
-      .where("NOM_EMAIL = :nom_email", { nom_email: dataUpdate.nom_email })
-      .execute();
+    console.log(user);
 
-    if (userUpdate) {
+    if (user != null) {
+
+      user.NOM_USUARIO = dataUpdate.nom_usuario.trim();
+      user.NOM_EMAIL = dataUpdate.nom_email.trim();
+      if (dataUpdate.nom_senha != '') {
+        user.NOM_SENHA = md5(dataUpdate.nom_senha).trim();
+      }
+      user.FLG_STATUS = dataUpdate.flg_status;
+      user.FLG_TIPO_USUARIO = dataUpdate.flg_tipo_usuario;
+
+      await this.repository.save(user);
+
       return true;
-
     } else {
       return false;
-
     }
+
   }
 
-  async getAllUsers(handle_enterprise:number): Promise<User[] | false> {
+  async getAllUsers(handle_enterprise: number): Promise<User[] | false> {
 
     const users = await this.repository
       .createQueryBuilder()
