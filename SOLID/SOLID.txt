@@ -1,0 +1,9 @@
+SOLID
+
+
+    SPR -> Single Responsability Principle: Se basea em criar classes e funções que foquem em seu contexto específico de atuação. 
+           Utilizá-las visando ao máximo manter coeso todas suas funcionalidades, fazendo com que cada uma delas seja relacionada e contribua
+           para solucionar problema(s) que estejam interligados contextualmente.
+           Dessa forma se consegue criar códigos de maior facildiade de manutenção, criação de testes unitários e organização.
+
+    OCP -> Open Closed Principle: 
